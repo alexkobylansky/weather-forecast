@@ -41,284 +41,87 @@ export default function WeatherForecast() {
       </header>
 
       <main className="container mx-auto px-4 py-8">
-        {/* Current Weather Section */}
-        <section className="mb-12">
-          <Card className="bg-card border-border shadow-lg">
-            <CardHeader className="text-center pb-4">
-              <div className="flex items-center justify-center mb-2">
-                <Sun className="h-16 w-16 text-accent mr-4" />
-                <div>
-                  <CardTitle className="text-6xl font-serif font-black text-foreground mb-2">24°C</CardTitle>
-                  <p className="text-xl text-muted-foreground">Sunny</p>
-                </div>
-              </div>
-              <div className="flex items-center justify-center space-x-2 text-muted-foreground">
-                <span>New York, NY</span>
-              </div>
-            </CardHeader>
+        <Tabs defaultValue="current" className="w-full">
+          <TabsList className="grid w-full grid-cols-2 mb-8">
+            <TabsTrigger value="current">Current Weather & Hourly</TabsTrigger>
+            <TabsTrigger value="forecast">5-Day Forecast</TabsTrigger>
+          </TabsList>
 
-            <CardContent>
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-                <div className="flex items-center space-x-2 p-3 rounded-lg bg-muted">
-                  <Thermometer className="h-5 w-5 text-primary" />
-                  <div>
-                    <p className="text-sm text-muted-foreground">Feels like</p>
-                    <p className="font-semibold">27°C</p>
+          <TabsContent value="current">
+            {/* Current Weather Section */}
+            <section className="mb-12">
+              <Card className="bg-card border-border shadow-lg">
+                <CardHeader className="text-center pb-4">
+                  <div className="flex items-center justify-center mb-2">
+                    <Sun className="h-16 w-16 text-accent mr-4" />
+                    <div>
+                      <CardTitle className="text-6xl font-serif font-black text-foreground mb-2">24°C</CardTitle>
+                      <p className="text-xl text-muted-foreground">Sunny</p>
+                    </div>
                   </div>
-                </div>
-
-                <div className="flex items-center space-x-2 p-3 rounded-lg bg-muted">
-                  <Sunrise className="h-5 w-5 text-primary" />
-                  <div>
-                    <p className="text-sm text-muted-foreground">Sunrise</p>
-                    <p className="font-semibold">6:24 AM</p>
+                  <div className="flex items-center justify-center space-x-2 text-muted-foreground">
+                    <span>New York, NY</span>
                   </div>
-                </div>
-
-                <div className="flex items-center space-x-2 p-3 rounded-lg bg-muted">
-                  <Sunset className="h-5 w-5 text-primary" />
-                  <div>
-                    <p className="text-sm text-muted-foreground">Sunset</p>
-                    <p className="font-semibold">7:42 PM</p>
-                  </div>
-                </div>
-
-                <div className="flex items-center space-x-2 p-3 rounded-lg bg-muted">
-                  <Clock className="h-5 w-5 text-primary" />
-                  <div>
-                    <p className="text-sm text-muted-foreground">Day length</p>
-                    <p className="font-semibold">13h 18m</p>
-                  </div>
-                </div>
-
-                <div className="flex items-center space-x-2 p-3 rounded-lg bg-muted">
-                  <Eye className="h-5 w-5 text-primary" />
-                  <div>
-                    <p className="text-sm text-muted-foreground">Visibility</p>
-                    <p className="font-semibold">10 km</p>
-                  </div>
-                </div>
-
-                <div className="flex items-center space-x-2 p-3 rounded-lg bg-muted">
-                  <Wind className="h-5 w-5 text-primary" />
-                  <div>
-                    <p className="text-sm text-muted-foreground">Wind</p>
-                    <p className="font-semibold">12 km/h</p>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </section>
-
-        {/* Hourly Forecast Table */}
-        <section className="mb-12">
-          <h2 className="text-3xl font-serif font-bold text-foreground mb-6">Hourly Forecast</h2>
-          <Card>
-            <CardContent className="p-0">
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Time</TableHead>
-                    <TableHead>Weather</TableHead>
-                    <TableHead>Temperature</TableHead>
-                    <TableHead>Feels Like</TableHead>
-                    <TableHead>Wind</TableHead>
-                    <TableHead>Humidity</TableHead>
-                    <TableHead>Visibility</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {[
-                    {
-                      time: "12:00 PM",
-                      icon: Sun,
-                      temp: "24°C",
-                      feels: "27°C",
-                      wind: "12 km/h",
-                      humidity: "65%",
-                      visibility: "10 km",
-                      desc: "Sunny",
-                    },
-                    {
-                      time: "1:00 PM",
-                      icon: Sun,
-                      temp: "25°C",
-                      feels: "28°C",
-                      wind: "14 km/h",
-                      humidity: "62%",
-                      visibility: "10 km",
-                      desc: "Sunny",
-                    },
-                    {
-                      time: "2:00 PM",
-                      icon: Cloud,
-                      temp: "26°C",
-                      feels: "29°C",
-                      wind: "16 km/h",
-                      humidity: "60%",
-                      visibility: "9 km",
-                      desc: "Partly Cloudy",
-                    },
-                    {
-                      time: "3:00 PM",
-                      icon: Cloud,
-                      temp: "25°C",
-                      feels: "28°C",
-                      wind: "18 km/h",
-                      humidity: "63%",
-                      visibility: "8 km",
-                      desc: "Cloudy",
-                    },
-                    {
-                      time: "4:00 PM",
-                      icon: CloudRain,
-                      temp: "23°C",
-                      feels: "26°C",
-                      wind: "20 km/h",
-                      humidity: "75%",
-                      visibility: "6 km",
-                      desc: "Light Rain",
-                    },
-                    {
-                      time: "5:00 PM",
-                      icon: CloudRain,
-                      temp: "22°C",
-                      feels: "25°C",
-                      wind: "22 km/h",
-                      humidity: "80%",
-                      visibility: "5 km",
-                      desc: "Rain",
-                    },
-                    {
-                      time: "6:00 PM",
-                      icon: Cloud,
-                      temp: "21°C",
-                      feels: "24°C",
-                      wind: "18 km/h",
-                      humidity: "78%",
-                      visibility: "7 km",
-                      desc: "Cloudy",
-                    },
-                    {
-                      time: "7:00 PM",
-                      icon: Cloud,
-                      temp: "20°C",
-                      feels: "23°C",
-                      wind: "15 km/h",
-                      humidity: "76%",
-                      visibility: "8 km",
-                      desc: "Partly Cloudy",
-                    },
-                  ].map((hour, index) => (
-                    <TableRow key={index}>
-                      <TableCell className="font-medium">{hour.time}</TableCell>
-                      <TableCell>
-                        <div className="flex items-center space-x-2">
-                          <hour.icon className="h-5 w-5 text-primary" />
-                          <span>{hour.desc}</span>
-                        </div>
-                      </TableCell>
-                      <TableCell className="font-semibold">{hour.temp}</TableCell>
-                      <TableCell>{hour.feels}</TableCell>
-                      <TableCell>{hour.wind}</TableCell>
-                      <TableCell>{hour.humidity}</TableCell>
-                      <TableCell>{hour.visibility}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </CardContent>
-          </Card>
-        </section>
-
-        {/* 5-Day Forecast with Tabs */}
-        <section>
-          <h2 className="text-3xl font-serif font-bold text-foreground mb-6">5-Day Forecast</h2>
-          <Tabs defaultValue="day1" className="w-full">
-            <TabsList className="grid w-full grid-cols-5">
-              <TabsTrigger value="day1">
-                <div className="forecast-day-block">
-                  <h3>Вс</h3>
-                  <span className="forecast-day-date">Август 24</span>
-                  <span className="forecast-day-icon"><img src="https://openweathermap.org/img/wn/10d.png" alt="icon"/></span>
-                  <span className="forecast-day-temperature">19°C</span>
-                  <span className="forecast-day-description">небольшой дождь</span>
-                </div>
-              </TabsTrigger>
-              <TabsTrigger value="day2">Tomorrow</TabsTrigger>
-              <TabsTrigger value="day3">Wednesday</TabsTrigger>
-              <TabsTrigger value="day4">Thursday</TabsTrigger>
-              <TabsTrigger value="day5">Friday</TabsTrigger>
-            </TabsList>
-            <TabsContent value="day1" className="mt-6">
-              <Card>
-                <CardHeader>
-                <CardTitle>Today - March 15, 2024</CardTitle>
                 </CardHeader>
-                <CardContent className="p-0">
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead>Time</TableHead>
-                        <TableHead>Weather</TableHead>
-                        <TableHead>Temperature</TableHead>
-                        <TableHead>Wind</TableHead>
-                        <TableHead>Humidity</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {[
-                        { time: "12:00 PM", icon: Sun, temp: "24°C", wind: "12 km/h", humidity: "65%", desc: "Sunny" },
-                        {
-                          time: "3:00 PM",
-                          icon: Cloud,
-                          temp: "25°C",
-                          wind: "18 km/h",
-                          humidity: "63%",
-                          desc: "Partly Cloudy",
-                        },
-                        {
-                          time: "6:00 PM",
-                          icon: Cloud,
-                          temp: "21°C",
-                          wind: "18 km/h",
-                          humidity: "78%",
-                          desc: "Cloudy",
-                        },
-                        {
-                          time: "9:00 PM",
-                          icon: Cloud,
-                          temp: "19°C",
-                          wind: "15 km/h",
-                          humidity: "82%",
-                          desc: "Cloudy",
-                        },
-                      ].map((period, index) => (
-                        <TableRow key={index}>
-                          <TableCell className="font-medium">{period.time}</TableCell>
-                          <TableCell>
-                            <div className="flex items-center space-x-2">
-                              <period.icon className="h-5 w-5 text-primary" />
-                              <span>{period.desc}</span>
-                            </div>
-                          </TableCell>
-                          <TableCell className="font-semibold">{period.temp}</TableCell>
-                          <TableCell>{period.wind}</TableCell>
-                          <TableCell>{period.humidity}</TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
+
+                <CardContent>
+                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                    <div className="flex items-center space-x-2 p-3 rounded-lg bg-muted">
+                      <Thermometer className="h-5 w-5 text-primary" />
+                      <div>
+                        <p className="text-sm text-muted-foreground">Feels like</p>
+                        <p className="font-semibold">27°C</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center space-x-2 p-3 rounded-lg bg-muted">
+                      <Sunrise className="h-5 w-5 text-primary" />
+                      <div>
+                        <p className="text-sm text-muted-foreground">Sunrise</p>
+                        <p className="font-semibold">6:24 AM</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center space-x-2 p-3 rounded-lg bg-muted">
+                      <Sunset className="h-5 w-5 text-primary" />
+                      <div>
+                        <p className="text-sm text-muted-foreground">Sunset</p>
+                        <p className="font-semibold">7:42 PM</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center space-x-2 p-3 rounded-lg bg-muted">
+                      <Clock className="h-5 w-5 text-primary" />
+                      <div>
+                        <p className="text-sm text-muted-foreground">Day length</p>
+                        <p className="font-semibold">13h 18m</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center space-x-2 p-3 rounded-lg bg-muted">
+                      <Eye className="h-5 w-5 text-primary" />
+                      <div>
+                        <p className="text-sm text-muted-foreground">Visibility</p>
+                        <p className="font-semibold">10 km</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center space-x-2 p-3 rounded-lg bg-muted">
+                      <Wind className="h-5 w-5 text-primary" />
+                      <div>
+                        <p className="text-sm text-muted-foreground">Wind</p>
+                        <p className="font-semibold">12 km/h</p>
+                      </div>
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
-            </TabsContent>
+            </section>
 
-            <TabsContent value="day2" className="mt-6">
+            {/* Hourly Forecast Table */}
+            <section>
+              <h2 className="text-3xl font-serif font-bold text-foreground mb-6">Hourly Forecast</h2>
               <Card>
-                <CardHeader>
-                  <CardTitle>Tomorrow - March 16, 2024</CardTitle>
-                </CardHeader>
                 <CardContent className="p-0">
                   <Table>
                     <TableHeader>
@@ -326,254 +129,482 @@ export default function WeatherForecast() {
                         <TableHead>Time</TableHead>
                         <TableHead>Weather</TableHead>
                         <TableHead>Temperature</TableHead>
+                        <TableHead>Feels Like</TableHead>
                         <TableHead>Wind</TableHead>
                         <TableHead>Humidity</TableHead>
+                        <TableHead>Visibility</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
                       {[
                         {
                           time: "12:00 PM",
+                          icon: Sun,
+                          temp: "24°C",
+                          feels: "27°C",
+                          wind: "12 km/h",
+                          humidity: "65%",
+                          visibility: "10 km",
+                          desc: "Sunny",
+                        },
+                        {
+                          time: "1:00 PM",
+                          icon: Sun,
+                          temp: "25°C",
+                          feels: "28°C",
+                          wind: "14 km/h",
+                          humidity: "62%",
+                          visibility: "10 km",
+                          desc: "Sunny",
+                        },
+                        {
+                          time: "2:00 PM",
                           icon: Cloud,
-                          temp: "22°C",
-                          wind: "15 km/h",
-                          humidity: "70%",
-                          desc: "Cloudy",
+                          temp: "26°C",
+                          feels: "29°C",
+                          wind: "16 km/h",
+                          humidity: "60%",
+                          visibility: "9 km",
+                          desc: "Partly Cloudy",
                         },
                         {
                           time: "3:00 PM",
+                          icon: Cloud,
+                          temp: "25°C",
+                          feels: "28°C",
+                          wind: "18 km/h",
+                          humidity: "63%",
+                          visibility: "8 km",
+                          desc: "Cloudy",
+                        },
+                        {
+                          time: "4:00 PM",
                           icon: CloudRain,
-                          temp: "20°C",
-                          wind: "22 km/h",
-                          humidity: "85%",
+                          temp: "23°C",
+                          feels: "26°C",
+                          wind: "20 km/h",
+                          humidity: "75%",
+                          visibility: "6 km",
                           desc: "Light Rain",
                         },
                         {
-                          time: "6:00 PM",
+                          time: "5:00 PM",
                           icon: CloudRain,
-                          temp: "18°C",
-                          wind: "25 km/h",
-                          humidity: "90%",
-                          desc: "Rain",
-                        },
-                        {
-                          time: "9:00 PM",
-                          icon: Cloud,
-                          temp: "17°C",
-                          wind: "20 km/h",
-                          humidity: "88%",
-                          desc: "Cloudy",
-                        },
-                      ].map((period, index) => (
-                        <TableRow key={index}>
-                          <TableCell className="font-medium">{period.time}</TableCell>
-                          <TableCell>
-                            <div className="flex items-center space-x-2">
-                              <period.icon className="h-5 w-5 text-primary" />
-                              <span>{period.desc}</span>
-                            </div>
-                          </TableCell>
-                          <TableCell className="font-semibold">{period.temp}</TableCell>
-                          <TableCell>{period.wind}</TableCell>
-                          <TableCell>{period.humidity}</TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            <TabsContent value="day3" className="mt-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Wednesday - March 17, 2024</CardTitle>
-                </CardHeader>
-                <CardContent className="p-0">
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead>Time</TableHead>
-                        <TableHead>Weather</TableHead>
-                        <TableHead>Temperature</TableHead>
-                        <TableHead>Wind</TableHead>
-                        <TableHead>Humidity</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {[
-                        {
-                          time: "12:00 PM",
-                          icon: CloudRain,
-                          temp: "19°C",
-                          wind: "18 km/h",
-                          humidity: "88%",
-                          desc: "Rain",
-                        },
-                        {
-                          time: "3:00 PM",
-                          icon: CloudRain,
-                          temp: "18°C",
-                          wind: "20 km/h",
-                          humidity: "92%",
-                          desc: "Heavy Rain",
-                        },
-                        {
-                          time: "6:00 PM",
-                          icon: CloudRain,
-                          temp: "17°C",
-                          wind: "22 km/h",
-                          humidity: "95%",
-                          desc: "Rain",
-                        },
-                        {
-                          time: "9:00 PM",
-                          icon: Cloud,
-                          temp: "16°C",
-                          wind: "18 km/h",
-                          humidity: "90%",
-                          desc: "Cloudy",
-                        },
-                      ].map((period, index) => (
-                        <TableRow key={index}>
-                          <TableCell className="font-medium">{period.time}</TableCell>
-                          <TableCell>
-                            <div className="flex items-center space-x-2">
-                              <period.icon className="h-5 w-5 text-primary" />
-                              <span>{period.desc}</span>
-                            </div>
-                          </TableCell>
-                          <TableCell className="font-semibold">{period.temp}</TableCell>
-                          <TableCell>{period.wind}</TableCell>
-                          <TableCell>{period.humidity}</TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            <TabsContent value="day4" className="mt-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Thursday - March 18, 2024</CardTitle>
-                </CardHeader>
-                <CardContent className="p-0">
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead>Time</TableHead>
-                        <TableHead>Weather</TableHead>
-                        <TableHead>Temperature</TableHead>
-                        <TableHead>Wind</TableHead>
-                        <TableHead>Humidity</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {[
-                        { time: "12:00 PM", icon: Sun, temp: "26°C", wind: "10 km/h", humidity: "55%", desc: "Sunny" },
-                        { time: "3:00 PM", icon: Sun, temp: "28°C", wind: "12 km/h", humidity: "50%", desc: "Sunny" },
-                        {
-                          time: "6:00 PM",
-                          icon: Cloud,
-                          temp: "25°C",
-                          wind: "14 km/h",
-                          humidity: "60%",
-                          desc: "Partly Cloudy",
-                        },
-                        {
-                          time: "9:00 PM",
-                          icon: Cloud,
                           temp: "22°C",
-                          wind: "12 km/h",
-                          humidity: "65%",
-                          desc: "Cloudy",
-                        },
-                      ].map((period, index) => (
-                        <TableRow key={index}>
-                          <TableCell className="font-medium">{period.time}</TableCell>
-                          <TableCell>
-                            <div className="flex items-center space-x-2">
-                              <period.icon className="h-5 w-5 text-primary" />
-                              <span>{period.desc}</span>
-                            </div>
-                          </TableCell>
-                          <TableCell className="font-semibold">{period.temp}</TableCell>
-                          <TableCell>{period.wind}</TableCell>
-                          <TableCell>{period.humidity}</TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            <TabsContent value="day5" className="mt-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Friday - March 19, 2024</CardTitle>
-                </CardHeader>
-                <CardContent className="p-0">
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead>Time</TableHead>
-                        <TableHead>Weather</TableHead>
-                        <TableHead>Temperature</TableHead>
-                        <TableHead>Wind</TableHead>
-                        <TableHead>Humidity</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {[
-                        {
-                          time: "12:00 PM",
-                          icon: Cloud,
-                          temp: "23°C",
-                          wind: "16 km/h",
-                          humidity: "68%",
-                          desc: "Cloudy",
+                          feels: "25°C",
+                          wind: "22 km/h",
+                          humidity: "80%",
+                          visibility: "5 km",
+                          desc: "Rain",
                         },
                         {
-                          time: "3:00 PM",
-                          icon: Sun,
-                          temp: "25°C",
-                          wind: "14 km/h",
-                          humidity: "62%",
-                          desc: "Partly Sunny",
-                        },
-                        { time: "6:00 PM", icon: Sun, temp: "24°C", wind: "12 km/h", humidity: "58%", desc: "Sunny" },
-                        {
-                          time: "9:00 PM",
+                          time: "6:00 PM",
                           icon: Cloud,
                           temp: "21°C",
-                          wind: "10 km/h",
-                          humidity: "70%",
+                          feels: "24°C",
+                          wind: "18 km/h",
+                          humidity: "78%",
+                          visibility: "7 km",
+                          desc: "Cloudy",
+                        },
+                        {
+                          time: "7:00 PM",
+                          icon: Cloud,
+                          temp: "20°C",
+                          feels: "23°C",
+                          wind: "15 km/h",
+                          humidity: "76%",
+                          visibility: "8 km",
                           desc: "Partly Cloudy",
                         },
-                      ].map((period, index) => (
+                      ].map((hour, index) => (
                         <TableRow key={index}>
-                          <TableCell className="font-medium">{period.time}</TableCell>
+                          <TableCell className="font-medium">{hour.time}</TableCell>
                           <TableCell>
                             <div className="flex items-center space-x-2">
-                              <period.icon className="h-5 w-5 text-primary" />
-                              <span>{period.desc}</span>
+                              <hour.icon className="h-5 w-5 text-primary" />
+                              <span>{hour.desc}</span>
                             </div>
                           </TableCell>
-                          <TableCell className="font-semibold">{period.temp}</TableCell>
-                          <TableCell>{period.wind}</TableCell>
-                          <TableCell>{period.humidity}</TableCell>
+                          <TableCell className="font-semibold">{hour.temp}</TableCell>
+                          <TableCell>{hour.feels}</TableCell>
+                          <TableCell>{hour.wind}</TableCell>
+                          <TableCell>{hour.humidity}</TableCell>
+                          <TableCell>{hour.visibility}</TableCell>
                         </TableRow>
                       ))}
                     </TableBody>
                   </Table>
                 </CardContent>
               </Card>
-            </TabsContent>
-          </Tabs>
-        </section>
+            </section>
+          </TabsContent>
+
+          <TabsContent value="forecast">
+            <section>
+              <h2 className="text-3xl font-serif font-bold text-foreground mb-6">5-Day Forecast</h2>
+              <Tabs defaultValue="day1" className="w-full">
+                <TabsList className="grid w-full grid-cols-5">
+                  <TabsTrigger value="day1">Today</TabsTrigger>
+                  <TabsTrigger value="day2">Tomorrow</TabsTrigger>
+                  <TabsTrigger value="day3">Wednesday</TabsTrigger>
+                  <TabsTrigger value="day4">Thursday</TabsTrigger>
+                  <TabsTrigger value="day5">Friday</TabsTrigger>
+                </TabsList>
+
+                <TabsContent value="day1" className="mt-6">
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>Today - March 15, 2024</CardTitle>
+                    </CardHeader>
+                    <CardContent className="p-0">
+                      <Table>
+                        <TableHeader>
+                          <TableRow>
+                            <TableHead>Time</TableHead>
+                            <TableHead>Weather</TableHead>
+                            <TableHead>Temperature</TableHead>
+                            <TableHead>Wind</TableHead>
+                            <TableHead>Humidity</TableHead>
+                          </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                          {[
+                            {
+                              time: "12:00 PM",
+                              icon: Sun,
+                              temp: "24°C",
+                              wind: "12 km/h",
+                              humidity: "65%",
+                              desc: "Sunny",
+                            },
+                            {
+                              time: "3:00 PM",
+                              icon: Cloud,
+                              temp: "25°C",
+                              wind: "18 km/h",
+                              humidity: "63%",
+                              desc: "Partly Cloudy",
+                            },
+                            {
+                              time: "6:00 PM",
+                              icon: Cloud,
+                              temp: "21°C",
+                              wind: "18 km/h",
+                              humidity: "78%",
+                              desc: "Cloudy",
+                            },
+                            {
+                              time: "9:00 PM",
+                              icon: Cloud,
+                              temp: "19°C",
+                              wind: "15 km/h",
+                              humidity: "82%",
+                              desc: "Cloudy",
+                            },
+                          ].map((period, index) => (
+                            <TableRow key={index}>
+                              <TableCell className="font-medium">{period.time}</TableCell>
+                              <TableCell>
+                                <div className="flex items-center space-x-2">
+                                  <period.icon className="h-5 w-5 text-primary" />
+                                  <span>{period.desc}</span>
+                                </div>
+                              </TableCell>
+                              <TableCell className="font-semibold">{period.temp}</TableCell>
+                              <TableCell>{period.wind}</TableCell>
+                              <TableCell>{period.humidity}</TableCell>
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      </Table>
+                    </CardContent>
+                  </Card>
+                </TabsContent>
+
+                <TabsContent value="day2" className="mt-6">
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>Tomorrow - March 16, 2024</CardTitle>
+                    </CardHeader>
+                    <CardContent className="p-0">
+                      <Table>
+                        <TableHeader>
+                          <TableRow>
+                            <TableHead>Time</TableHead>
+                            <TableHead>Weather</TableHead>
+                            <TableHead>Temperature</TableHead>
+                            <TableHead>Wind</TableHead>
+                            <TableHead>Humidity</TableHead>
+                          </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                          {[
+                            {
+                              time: "12:00 PM",
+                              icon: Cloud,
+                              temp: "22°C",
+                              wind: "15 km/h",
+                              humidity: "70%",
+                              desc: "Cloudy",
+                            },
+                            {
+                              time: "3:00 PM",
+                              icon: CloudRain,
+                              temp: "20°C",
+                              wind: "22 km/h",
+                              humidity: "85%",
+                              desc: "Light Rain",
+                            },
+                            {
+                              time: "6:00 PM",
+                              icon: CloudRain,
+                              temp: "18°C",
+                              wind: "25 km/h",
+                              humidity: "90%",
+                              desc: "Rain",
+                            },
+                            {
+                              time: "9:00 PM",
+                              icon: Cloud,
+                              temp: "17°C",
+                              wind: "20 km/h",
+                              humidity: "88%",
+                              desc: "Cloudy",
+                            },
+                          ].map((period, index) => (
+                            <TableRow key={index}>
+                              <TableCell className="font-medium">{period.time}</TableCell>
+                              <TableCell>
+                                <div className="flex items-center space-x-2">
+                                  <period.icon className="h-5 w-5 text-primary" />
+                                  <span>{period.desc}</span>
+                                </div>
+                              </TableCell>
+                              <TableCell className="font-semibold">{period.temp}</TableCell>
+                              <TableCell>{period.wind}</TableCell>
+                              <TableCell>{period.humidity}</TableCell>
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      </Table>
+                    </CardContent>
+                  </Card>
+                </TabsContent>
+
+                <TabsContent value="day3" className="mt-6">
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>Wednesday - March 17, 2024</CardTitle>
+                    </CardHeader>
+                    <CardContent className="p-0">
+                      <Table>
+                        <TableHeader>
+                          <TableRow>
+                            <TableHead>Time</TableHead>
+                            <TableHead>Weather</TableHead>
+                            <TableHead>Temperature</TableHead>
+                            <TableHead>Wind</TableHead>
+                            <TableHead>Humidity</TableHead>
+                          </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                          {[
+                            {
+                              time: "12:00 PM",
+                              icon: CloudRain,
+                              temp: "19°C",
+                              wind: "18 km/h",
+                              humidity: "88%",
+                              desc: "Rain",
+                            },
+                            {
+                              time: "3:00 PM",
+                              icon: CloudRain,
+                              temp: "18°C",
+                              wind: "20 km/h",
+                              humidity: "92%",
+                              desc: "Heavy Rain",
+                            },
+                            {
+                              time: "6:00 PM",
+                              icon: CloudRain,
+                              temp: "17°C",
+                              wind: "22 km/h",
+                              humidity: "95%",
+                              desc: "Rain",
+                            },
+                            {
+                              time: "9:00 PM",
+                              icon: Cloud,
+                              temp: "16°C",
+                              wind: "18 km/h",
+                              humidity: "90%",
+                              desc: "Cloudy",
+                            },
+                          ].map((period, index) => (
+                            <TableRow key={index}>
+                              <TableCell className="font-medium">{period.time}</TableCell>
+                              <TableCell>
+                                <div className="flex items-center space-x-2">
+                                  <period.icon className="h-5 w-5 text-primary" />
+                                  <span>{period.desc}</span>
+                                </div>
+                              </TableCell>
+                              <TableCell className="font-semibold">{period.temp}</TableCell>
+                              <TableCell>{period.wind}</TableCell>
+                              <TableCell>{period.humidity}</TableCell>
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      </Table>
+                    </CardContent>
+                  </Card>
+                </TabsContent>
+
+                <TabsContent value="day4" className="mt-6">
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>Thursday - March 18, 2024</CardTitle>
+                    </CardHeader>
+                    <CardContent className="p-0">
+                      <Table>
+                        <TableHeader>
+                          <TableRow>
+                            <TableHead>Time</TableHead>
+                            <TableHead>Weather</TableHead>
+                            <TableHead>Temperature</TableHead>
+                            <TableHead>Wind</TableHead>
+                            <TableHead>Humidity</TableHead>
+                          </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                          {[
+                            {
+                              time: "12:00 PM",
+                              icon: Sun,
+                              temp: "26°C",
+                              wind: "10 km/h",
+                              humidity: "55%",
+                              desc: "Sunny",
+                            },
+                            {
+                              time: "3:00 PM",
+                              icon: Sun,
+                              temp: "28°C",
+                              wind: "12 km/h",
+                              humidity: "50%",
+                              desc: "Sunny",
+                            },
+                            {
+                              time: "6:00 PM",
+                              icon: Cloud,
+                              temp: "25°C",
+                              wind: "14 km/h",
+                              humidity: "60%",
+                              desc: "Partly Cloudy",
+                            },
+                            {
+                              time: "9:00 PM",
+                              icon: Cloud,
+                              temp: "22°C",
+                              wind: "12 km/h",
+                              humidity: "65%",
+                              desc: "Cloudy",
+                            },
+                          ].map((period, index) => (
+                            <TableRow key={index}>
+                              <TableCell className="font-medium">{period.time}</TableCell>
+                              <TableCell>
+                                <div className="flex items-center space-x-2">
+                                  <period.icon className="h-5 w-5 text-primary" />
+                                  <span>{period.desc}</span>
+                                </div>
+                              </TableCell>
+                              <TableCell className="font-semibold">{period.temp}</TableCell>
+                              <TableCell>{period.wind}</TableCell>
+                              <TableCell>{period.humidity}</TableCell>
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      </Table>
+                    </CardContent>
+                  </Card>
+                </TabsContent>
+
+                <TabsContent value="day5" className="mt-6">
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>Friday - March 19, 2024</CardTitle>
+                    </CardHeader>
+                    <CardContent className="p-0">
+                      <Table>
+                        <TableHeader>
+                          <TableRow>
+                            <TableHead>Time</TableHead>
+                            <TableHead>Weather</TableHead>
+                            <TableHead>Temperature</TableHead>
+                            <TableHead>Wind</TableHead>
+                            <TableHead>Humidity</TableHead>
+                          </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                          {[
+                            {
+                              time: "12:00 PM",
+                              icon: Cloud,
+                              temp: "23°C",
+                              wind: "16 km/h",
+                              humidity: "68%",
+                              desc: "Cloudy",
+                            },
+                            {
+                              time: "3:00 PM",
+                              icon: Sun,
+                              temp: "25°C",
+                              wind: "14 km/h",
+                              humidity: "62%",
+                              desc: "Partly Sunny",
+                            },
+                            {
+                              time: "6:00 PM",
+                              icon: Sun,
+                              temp: "24°C",
+                              wind: "12 km/h",
+                              humidity: "58%",
+                              desc: "Sunny",
+                            },
+                            {
+                              time: "9:00 PM",
+                              icon: Cloud,
+                              temp: "21°C",
+                              wind: "10 km/h",
+                              humidity: "70%",
+                              desc: "Partly Cloudy",
+                            },
+                          ].map((period, index) => (
+                            <TableRow key={index}>
+                              <TableCell className="font-medium">{period.time}</TableCell>
+                              <TableCell>
+                                <div className="flex items-center space-x-2">
+                                  <period.icon className="h-5 w-5 text-primary" />
+                                  <span>{period.desc}</span>
+                                </div>
+                              </TableCell>
+                              <TableCell className="font-semibold">{period.temp}</TableCell>
+                              <TableCell>{period.wind}</TableCell>
+                              <TableCell>{period.humidity}</TableCell>
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      </Table>
+                    </CardContent>
+                  </Card>
+                </TabsContent>
+              </Tabs>
+            </section>
+          </TabsContent>
+        </Tabs>
       </main>
 
       {/* Footer */}
