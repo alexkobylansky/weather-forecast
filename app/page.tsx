@@ -1,10 +1,54 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { LanguageSwitcher } from "@/components/language-switcher"
-import { Cloud, Cloudy, Sun, CloudRain, CloudDrizzle, CloudFog, CloudHail, CloudLightning, CloudMoon, CloudMoonRain, CloudRainWind, CloudSnow, CloudSun, CloudSunRain, Wind, Eye, Thermometer, Sunrise, Sunset, Clock, Moon } from "lucide-react"
+"use client"
+import {useEffect, useState} from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { LanguageSwitcher } from "@/components/language-switcher";
+import { Cloud, Cloudy, Sun, CloudRain, CloudDrizzle, CloudFog, CloudHail, CloudLightning, CloudMoon, CloudMoonRain, CloudRainWind, CloudSnow, CloudSun, CloudSunRain, Wind, Eye, Thermometer, Sunrise, Sunset, Clock, Moon, Droplet } from "lucide-react";
+
+import {initMap, getCurrentWeather, getForecastWeather, getOneCallAPI} from "@/services/weather-services";
+
+const currentDate: Date = new Date();
+let getDay = (time: number) => new Date(time);
+
+const monthsRus = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
+const monthsEng = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+const dayRu = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
+const dayEng = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+const timestampConversation = (t: number) => {
+  const now = getDay(t * 1000);
+  let hour: string | number = now.getHours();
+  let minute: string | number = now.getMinutes();
+  hour = (hour < 10) ? `0${hour}` : hour;
+  minute = (minute < 10) ? `0${minute}` : minute;
+  return `${hour}:${minute}`
+};
+
+const windDeg = (deg: number) => {
+  if (deg >= 0 || deg <= 22.5 && deg >= 337.5 || deg <= 360) return 'северный'
+  else if (deg >= 22.6 || deg <= 67.5) return 'северо-восточный'
+  else if (deg >= 67.6 || deg <= 112.5) return 'восточный'
+  else if (deg >= 112.6 || deg <= 157.5) return 'юго-восточный'
+  else if (deg >= 157.6 || deg <= 202.5) return 'южный'
+  else if (deg >= 202.6 || deg <= 277.5) return 'юго-западный'
+  else if (deg >= 277.6 || deg <= 282.5) return 'западный'
+};
+
+const getDuration = (sunrise: number, sunset: number) => {
+  const sunRise = getDay(sunrise).getTime();
+  const sunSet = getDay(sunset).getTime();
+  const different: number = sunSet - sunRise;
+  let hours: string | number = Math.floor((different % 86400) / 3600)
+  let minutes: string | number = Math.ceil(((different % 86400) % 3600) / 60);
+  if (minutes === 60) minutes -= 1;
+  hours = (hours < 10) ? '0' + hours : hours;
+  minutes = (minutes < 10) ? '0' + minutes : minutes;
+  return `${hours} ч ${minutes} мин`;
+};
 
 export default function WeatherForecast() {
   return (
