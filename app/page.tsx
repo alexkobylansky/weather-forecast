@@ -51,16 +51,52 @@ const getDuration = (sunrise: number, sunset: number) => {
 };
 
 export default function WeatherForecast() {
-  return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="sticky top-0 z-50 bg-primary/95 backdrop-blur supports-[backdrop-filter]:bg-primary/60 border-b border-primary/20">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <Cloud className="h-8 w-8 text-primary-foreground" />
-              <h1 className="text-2xl font-serif font-black text-primary-foreground">WeatherCast</h1>
-            </div>
+  const [currentWeather, setCurrentWeather] = useState<CurrentWeather | null>(null);
+  const [foreCastWeather, setForeCastWeather] = useState<ForecastWeather | null>(null);
+  const [oneCallApi, setOneCallApi] = useState<OneCall | null>(null);
+
+  const getPosition = async (lat: number, lon: number) => {
+    setCurrentWeather(await getCurrentWeather(lat, lon));
+    setForeCastWeather(await  getForecastWeather(lat, lon))
+    setOneCallApi(await getOneCallAPI(lat, lon));
+  };
+
+  const getLocation = () => {
+    let lat = 50.4497115;
+    let lon = 30.5235707;
+    navigator.geolocation.getCurrentPosition(function (geoPosition) {
+        let lat = geoPosition ? geoPosition.coords.latitude : 50.4497115;
+        let lon = geoPosition ? geoPosition.coords.longitude : 30.5235707;
+        void getPosition(lat, lon);
+      },
+      function (error) {
+        console.log(error);
+        void getPosition(lat, lon);
+      }
+    );
+  };
+
+  const todayAt23 = currentDate.setHours(23, 0, 0);
+  const tomorrowAt6 = todayAt23 + 25200000;
+  const timestampSeconds = Math.trunc(tomorrowAt6 / 1000);
+
+  useEffect(() => {
+    getLocation();
+  }, []);
+
+  if (!currentWeather && !foreCastWeather && !oneCallApi) {
+    return <div><p>Loading...</p></div>
+  } else {
+    return (
+      <div className="min-h-screen bg-background">
+        {/* Header */}
+        <header className="sticky top-0 z-50 bg-primary/95 backdrop-blur supports-[backdrop-filter]:bg-primary/60 border-b border-primary/20">
+          <div className="container mx-auto px-4 py-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-2">
+                <Cloud className="h-8 w-8 text-primary-foreground" />
+                <h1 className="text-2xl font-serif font-black text-primary-foreground">WeatherCast</h1>
+              </div>
 
             <div className="flex-1 max-w-md mx-8">
               <div className="relative">
