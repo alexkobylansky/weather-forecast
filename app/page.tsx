@@ -51,9 +51,9 @@ const getDuration = (sunrise: number, sunset: number) => {
 };
 
 export default function WeatherForecast() {
-  const [currentWeather, setCurrentWeather] = useState<CurrentWeather | null>(null);
-  const [foreCastWeather, setForeCastWeather] = useState<ForecastWeather | null>(null);
-  const [oneCallApi, setOneCallApi] = useState<OneCall | null>(null);
+  const [currentWeather, setCurrentWeather] = useState<CurrentWeather>({} as CurrentWeather);
+  const [foreCastWeather, setForeCastWeather] = useState<ForecastWeather>({} as ForecastWeather);
+  const [oneCallApi, setOneCallApi] = useState<OneCall>({} as OneCall);
 
   const getPosition = async (lat: number, lon: number) => {
     setCurrentWeather(await getCurrentWeather(lat, lon));
@@ -84,7 +84,7 @@ export default function WeatherForecast() {
     getLocation();
   }, []);
 
-  if (!currentWeather && !foreCastWeather && !oneCallApi) {
+  if (!currentWeather.cod && !foreCastWeather.cod && !oneCallApi.timezone) {
     return <div><p>Loading...</p></div>
   } else {
     return (
