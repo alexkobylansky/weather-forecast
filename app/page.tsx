@@ -337,9 +337,14 @@ export default function WeatherForecast() {
                             <TableRow>
                               <TableHead>Time</TableHead>
                               <TableHead>Weather</TableHead>
-                              <TableHead>Temperature</TableHead>
-                              <TableHead>Wind</TableHead>
+                              <TableHead>Temperature (&deg;C)</TableHead>
+                              <TableHead>Feels Like (&deg;C)</TableHead>
+                              <TableHead>Wind (m/s)</TableHead>
+                              <TableHead>Wind direction</TableHead>
+                              <TableHead>Wind gust</TableHead>
                               <TableHead>Humidity</TableHead>
+                              <TableHead>Pressure (mmHg)</TableHead>
+                              <TableHead>Visibility (km)</TableHead>
                             </TableRow>
                           </TableHeader>
                           <TableBody>
