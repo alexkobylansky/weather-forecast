@@ -103,7 +103,6 @@ export default function WeatherForecast() {
                 <Cloud className="h-8 w-8 text-primary-foreground" />
                 <h1 className="text-2xl font-serif font-black text-primary-foreground">WeatherCast</h1>
               </div>
-
               <div className="flex-1 max-w-md mx-8">
                 <div className="relative">
                   <Input
@@ -115,7 +114,6 @@ export default function WeatherForecast() {
                   </Button>
                 </div>
               </div>
-
               <div className="flex items-center space-x-2">
                 <LanguageSwitcher />
                 <Button variant="ghost" className="text-primary-foreground hover:bg-primary-foreground/10">
@@ -125,14 +123,12 @@ export default function WeatherForecast() {
             </div>
           </div>
         </header>
-
         <main className="container mx-auto px-4 py-8">
           <Tabs defaultValue="current" className="w-full">
             <TabsList className="grid w-full grid-cols-2 mb-8">
               <TabsTrigger value="current">Current Weather & Hourly</TabsTrigger>
               <TabsTrigger value="forecast">5-Day Forecast</TabsTrigger>
             </TabsList>
-
             <TabsContent value="current">
               {/* Current Weather Section */}
               <section className="mb-12">
@@ -165,7 +161,6 @@ export default function WeatherForecast() {
                       </tbody>
                     </table>
                   </CardHeader>
-
                   <CardContent>
                     <div className="flex flex-row justify-center flex-wrap w-full gap-4">
                       <div className="flex items-center grow justify-center  space-x-2 p-3 rounded-lg bg-muted">
@@ -175,7 +170,6 @@ export default function WeatherForecast() {
                           <p className="font-semibold">{timestampConversation(currentWeather?.sys.sunrise)}</p>
                         </div>
                       </div>
-
                       <div className="flex items-center grow justify-center  space-x-2 p-3 rounded-lg bg-muted">
                         <Sunset className="h-5 w-5 text-primary" />
                         <div>
@@ -183,7 +177,6 @@ export default function WeatherForecast() {
                           <p className="font-semibold">{timestampConversation(currentWeather?.sys.sunset)}</p>
                         </div>
                       </div>
-
                       <div className="flex items-center grow justify-center  space-x-2 p-3 rounded-lg bg-muted">
                         <Clock className="h-5 w-5 text-primary" />
                         <div>
@@ -191,7 +184,6 @@ export default function WeatherForecast() {
                           <p className="font-semibold">{getDuration(currentWeather?.sys?.sunrise, currentWeather?.sys.sunset)}</p>
                         </div>
                       </div>
-
                       <div className="flex items-center grow justify-center  space-x-2 p-3 rounded-lg bg-muted">
                         <Eye className="h-5 w-5 text-primary" />
                         <div>
@@ -199,7 +191,6 @@ export default function WeatherForecast() {
                           <p className="font-semibold">{(currentWeather?.visibility / 1000)} km</p>
                         </div>
                       </div>
-
                       <div className="flex items-center grow justify-center  space-x-2 p-3 rounded-lg bg-muted">
                         <Wind className="h-5 w-5 text-primary" />
                         <div>
@@ -219,7 +210,6 @@ export default function WeatherForecast() {
                   </CardContent>
                 </Card>
               </section>
-
               {/* Hourly Forecast Table */}
               <section>
                 <h2 className="text-3xl font-serif font-bold text-foreground mb-6">Hourly Forecast</h2>
@@ -275,7 +265,6 @@ export default function WeatherForecast() {
                 </Card>
               </section>
             </TabsContent>
-
             <TabsContent value="forecast">
               <section>
                 <h2 className="text-3xl font-serif font-bold text-foreground mb-6">5-Day Forecast</h2>
@@ -287,7 +276,6 @@ export default function WeatherForecast() {
                     <TabsTrigger value="day4">Thursday</TabsTrigger>
                     <TabsTrigger value="day5">Friday</TabsTrigger>
                   </TabsList>
-
                   <TabsContent value="day1" className="mt-6">
                     <Card>
                       <CardContent className="p-0">
@@ -354,7 +342,6 @@ export default function WeatherForecast() {
                       </CardContent>
                     </Card>
                   </TabsContent>
-
                   <TabsContent value="day2" className="mt-6">
                     <Card>
                       <CardHeader>
@@ -424,7 +411,6 @@ export default function WeatherForecast() {
                       </CardContent>
                     </Card>
                   </TabsContent>
-
                   <TabsContent value="day3" className="mt-6">
                     <Card>
                       <CardHeader>
@@ -494,7 +480,6 @@ export default function WeatherForecast() {
                       </CardContent>
                     </Card>
                   </TabsContent>
-
                   <TabsContent value="day4" className="mt-6">
                     <Card>
                       <CardHeader>
@@ -564,7 +549,6 @@ export default function WeatherForecast() {
                       </CardContent>
                     </Card>
                   </TabsContent>
-
                   <TabsContent value="day5" className="mt-6">
                     <Card>
                       <CardHeader>
@@ -639,7 +623,6 @@ export default function WeatherForecast() {
             </TabsContent>
           </Tabs>
         </main>
-
         {/* Footer */}
         <footer className="bg-muted mt-16 py-8">
           <div className="container mx-auto px-4 text-center">
