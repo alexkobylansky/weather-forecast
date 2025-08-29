@@ -147,7 +147,7 @@ export default function WeatherForecast() {
           <div className="container mx-auto px-4 py-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-2">
-                <Cloud className="h-8 w-8 text-primary-foreground" />
+                <Cloud className="h-8 w-8 text-primary-foreground"/>
                 <h1 className="text-2xl font-serif font-black text-primary-foreground">WeatherCast</h1>
               </div>
               <div className="flex-1 max-w-md mx-8">
@@ -162,7 +162,7 @@ export default function WeatherForecast() {
                 </div>
               </div>
               <div className="flex items-center space-x-2">
-                <LanguageSwitcher />
+                <LanguageSwitcher/>
                 <Button variant="ghost" className="text-primary-foreground hover:bg-primary-foreground/10">
                   Settings
                 </Button>
@@ -211,35 +211,35 @@ export default function WeatherForecast() {
                   <CardContent>
                     <div className="flex flex-row justify-center flex-wrap w-full gap-4">
                       <div className="flex items-center grow justify-center  space-x-2 p-3 rounded-lg bg-muted">
-                        <Sunrise className="h-5 w-5 text-primary" />
+                        <Sunrise className="h-5 w-5 text-primary"/>
                         <div>
                           <p className="text-sm text-muted-foreground">Sunrise</p>
                           <p className="font-semibold">{timestampConversation(currentWeather?.sys.sunrise)}</p>
                         </div>
                       </div>
                       <div className="flex items-center grow justify-center  space-x-2 p-3 rounded-lg bg-muted">
-                        <Sunset className="h-5 w-5 text-primary" />
+                        <Sunset className="h-5 w-5 text-primary"/>
                         <div>
                           <p className="text-sm text-muted-foreground">Sunset</p>
                           <p className="font-semibold">{timestampConversation(currentWeather?.sys.sunset)}</p>
                         </div>
                       </div>
                       <div className="flex items-center grow justify-center  space-x-2 p-3 rounded-lg bg-muted">
-                        <Clock className="h-5 w-5 text-primary" />
+                        <Clock className="h-5 w-5 text-primary"/>
                         <div>
                           <p className="text-sm text-muted-foreground">Day length</p>
                           <p className="font-semibold">{getDuration(currentWeather?.sys?.sunrise, currentWeather?.sys.sunset)}</p>
                         </div>
                       </div>
                       <div className="flex items-center grow justify-center  space-x-2 p-3 rounded-lg bg-muted">
-                        <Eye className="h-5 w-5 text-primary" />
+                        <Eye className="h-5 w-5 text-primary"/>
                         <div>
                           <p className="text-sm text-muted-foreground">Visibility</p>
                           <p className="font-semibold">{(currentWeather?.visibility / 1000)} km</p>
                         </div>
                       </div>
                       <div className="flex items-center grow justify-center  space-x-2 p-3 rounded-lg bg-muted">
-                        <Wind className="h-5 w-5 text-primary" />
+                        <Wind className="h-5 w-5 text-primary"/>
                         <div>
                           <p className="text-sm text-muted-foreground">Wind</p>
                           <p className="font-semibold">{currentWeather?.wind.speed} м/с</p>
@@ -247,7 +247,7 @@ export default function WeatherForecast() {
                         </div>
                       </div>
                       <div className="flex items-center grow justify-center  space-x-2 p-3 rounded-lg bg-muted">
-                        <Droplet className="h-5 w-5 text-primary" />
+                        <Droplet className="h-5 w-5 text-primary"/>
                         <div>
                           <p className="text-sm text-muted-foreground">Humidity</p>
                           <p className="font-semibold">{currentWeather?.main.humidity} %</p>
