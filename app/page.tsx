@@ -90,6 +90,53 @@ export default function WeatherForecast() {
     getLocation();
   }, []);
 
+  const currentHourlyForecast: hourlyItem[] = [];
+
+  if (oneCallApi.hourly) {
+    for (let i = 0; i < oneCallApi?.hourly.length; i++) {
+      currentHourlyForecast.push(oneCallApi.hourly[i]);
+      if (oneCallApi.hourly[i].dt === timestampSeconds) break;
+    }
+  }
+
+  const trunc = (t: number) => Math.trunc(t / 1000);
+  const endToday = currentDate.setHours(23, 0, 0);
+  const MS_IN_DAY = 86400000; // 24 часа
+  const MS_IN_3_HOURS = 10800000; // 3 часа
+
+  const startDay1 = trunc(endToday + MS_IN_3_HOURS);
+  const endDay1 = trunc(endToday + MS_IN_DAY);
+  const startDay2 = trunc((endDay1 * 1000) + MS_IN_3_HOURS);
+  const endDay2 = trunc((endDay1 * 1000) + MS_IN_DAY);
+  const startDay3 = trunc((endDay2 * 1000) + MS_IN_3_HOURS);
+  const endDay3 = trunc((endDay2 * 1000) + MS_IN_DAY);
+  const startDay4 = trunc((endDay3 * 1000) + MS_IN_3_HOURS);
+  const endDay4 = trunc((endDay3 * 1000) + MS_IN_DAY);
+  const startDay5 = trunc((endDay4 * 1000) + MS_IN_3_HOURS);
+  const endDay5 = trunc((endDay4 * 1000) + MS_IN_DAY);
+
+  const day1 = [];
+  const day2 = [];
+  const day3 = [];
+  const day4 = [];
+  const day5 = [];
+
+  if (foreCastWeather.list) {
+    for (let i = 0; i < foreCastWeather.list.length; i++) {
+      if (foreCastWeather.list[i].dt >= startDay1 && foreCastWeather.list[i].dt <= endDay1) {
+        day1.push(foreCastWeather.list[i]);
+      } else if (foreCastWeather.list[i].dt >= startDay2 && foreCastWeather.list[i].dt <= endDay2) {
+        day2.push(foreCastWeather.list[i]);
+      } else if (foreCastWeather.list[i].dt >= startDay3 && foreCastWeather.list[i].dt <= endDay3) {
+        day3.push(foreCastWeather.list[i]);
+      } else if (foreCastWeather.list[i].dt >= startDay4 && foreCastWeather.list[i].dt <= endDay4) {
+        day4.push(foreCastWeather.list[i]);
+      } else if (foreCastWeather.list[i].dt >= startDay5 && foreCastWeather.list[i].dt <= endDay5) {
+        day5.push(foreCastWeather.list[i]);
+      }
+    }
+  }
+
   if (!currentWeather.cod && !foreCastWeather.cod && !oneCallApi.timezone) {
     return <div><p>Loading...</p></div>
   } else {
@@ -270,11 +317,23 @@ export default function WeatherForecast() {
                 <h2 className="text-3xl font-serif font-bold text-foreground mb-6">5-Day Forecast</h2>
                 <Tabs defaultValue="day1" className="w-full">
                   <TabsList className="grid w-full grid-cols-5">
-                    <TabsTrigger value="day1">Today</TabsTrigger>
-                    <TabsTrigger value="day2">Tomorrow</TabsTrigger>
-                    <TabsTrigger value="day3">Wednesday</TabsTrigger>
-                    <TabsTrigger value="day4">Thursday</TabsTrigger>
-                    <TabsTrigger value="day5">Friday</TabsTrigger>
+                    {oneCallApi.daily.map((day: dailyItem, index) => {
+                      if (day.dt >= startDay1 && day.dt <= endDay5) {
+                        let currentMonth = getDay((day.dt) * 1000).getMonth();
+                        let currentDay = getDay((day.dt) * 1000).getDate();
+                        return (
+                          <TabsTrigger key={index} value={`day${index}`}>
+                            <div className="forecast-day-block">
+                              <h3>{daysUkr[getDay(day.dt * 1000).getDay()]}</h3>
+                              <span className="forecast-day-date">{monthsUkr[currentMonth]} {currentDay}</span>
+                              <span className="forecast-day-icon"><img src={`https://openweathermap.org/img/wn/${day.weather['0'].icon}@2x.png`} alt="icon"/></span>
+                              <span className="forecast-day-temperature">{Math.floor(day.temp.max)}&deg;C</span><br/>
+                              <span className="forecast-day-description">{day.weather[0].description}</span>
+                            </div>
+                          </TabsTrigger>
+                        )
+                      }
+                    })}
                   </TabsList>
                   <TabsContent value="day1" className="mt-6">
                     <Card>
@@ -290,51 +349,24 @@ export default function WeatherForecast() {
                             </TableRow>
                           </TableHeader>
                           <TableBody>
-                            {[
-                              {
-                                time: "12:00 PM",
-                                icon: Sun,
-                                temp: "24°C",
-                                wind: "12 km/h",
-                                humidity: "65%",
-                                desc: "Sunny",
-                              },
-                              {
-                                time: "3:00 PM",
-                                icon: Cloud,
-                                temp: "25°C",
-                                wind: "18 km/h",
-                                humidity: "63%",
-                                desc: "Partly Cloudy",
-                              },
-                              {
-                                time: "6:00 PM",
-                                icon: Cloud,
-                                temp: "21°C",
-                                wind: "18 km/h",
-                                humidity: "78%",
-                                desc: "Cloudy",
-                              },
-                              {
-                                time: "9:00 PM",
-                                icon: Cloud,
-                                temp: "19°C",
-                                wind: "15 km/h",
-                                humidity: "82%",
-                                desc: "Cloudy",
-                              },
-                            ].map((period, index) => (
+                            {day1.map((day: listItem, index) => (
                               <TableRow key={index}>
-                                <TableCell className="font-medium">{period.time}</TableCell>
+                                <TableCell className="font-medium">{timestampConversation(day.dt)}</TableCell>
                                 <TableCell>
                                   <div className="flex items-center space-x-2">
-                                    <period.icon className="h-5 w-5 text-primary" />
-                                    <span>{period.desc}</span>
+                                    {/*<hour.icon className="h-5 w-5 text-primary" />*/}
+                                    <img src={`https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`} className="h-5 w-5" alt='icon'/>
+                                    <span>{day.weather[0].description}</span>
                                   </div>
                                 </TableCell>
-                                <TableCell className="font-semibold">{period.temp}</TableCell>
-                                <TableCell>{period.wind}</TableCell>
-                                <TableCell>{period.humidity}</TableCell>
+                                <TableCell className="font-semibold">{Math.round(day.main.temp)}&deg;</TableCell>
+                                <TableCell>{Math.round(day.main.feels_like)}&deg;</TableCell>
+                                <TableCell>{Math.round(day.wind.speed)}</TableCell>
+                                <TableCell>{windDeg(day.wind.deg)}</TableCell>
+                                <TableCell>{day.wind.gust}</TableCell>
+                                <TableCell>{day.main.humidity}%</TableCell>
+                                <TableCell>{Math.floor((day.main.pressure * 0.75006156) * 100) / 100}</TableCell>
+                                <TableCell>{day.visibility / 1000}</TableCell>
                               </TableRow>
                             ))}
                           </TableBody>
@@ -353,57 +385,35 @@ export default function WeatherForecast() {
                             <TableRow>
                               <TableHead>Time</TableHead>
                               <TableHead>Weather</TableHead>
-                              <TableHead>Temperature</TableHead>
-                              <TableHead>Wind</TableHead>
+                              <TableHead>Temperature (&deg;C)</TableHead>
+                              <TableHead>Feels Like (&deg;C)</TableHead>
+                              <TableHead>Wind (m/s)</TableHead>
+                              <TableHead>Wind direction</TableHead>
+                              <TableHead>Wind gust</TableHead>
                               <TableHead>Humidity</TableHead>
+                              <TableHead>Pressure (mmHg)</TableHead>
+                              <TableHead>Visibility (km)</TableHead>
                             </TableRow>
                           </TableHeader>
                           <TableBody>
-                            {[
-                              {
-                                time: "12:00 PM",
-                                icon: Cloud,
-                                temp: "22°C",
-                                wind: "15 km/h",
-                                humidity: "70%",
-                                desc: "Cloudy",
-                              },
-                              {
-                                time: "3:00 PM",
-                                icon: CloudRain,
-                                temp: "20°C",
-                                wind: "22 km/h",
-                                humidity: "85%",
-                                desc: "Light Rain",
-                              },
-                              {
-                                time: "6:00 PM",
-                                icon: CloudRain,
-                                temp: "18°C",
-                                wind: "25 km/h",
-                                humidity: "90%",
-                                desc: "Rain",
-                              },
-                              {
-                                time: "9:00 PM",
-                                icon: Cloud,
-                                temp: "17°C",
-                                wind: "20 km/h",
-                                humidity: "88%",
-                                desc: "Cloudy",
-                              },
-                            ].map((period, index) => (
+                            {day2.map((day: listItem, index) => (
                               <TableRow key={index}>
-                                <TableCell className="font-medium">{period.time}</TableCell>
+                                <TableCell className="font-medium">{timestampConversation(day.dt)}</TableCell>
                                 <TableCell>
                                   <div className="flex items-center space-x-2">
-                                    <period.icon className="h-5 w-5 text-primary" />
-                                    <span>{period.desc}</span>
+                                    {/*<hour.icon className="h-5 w-5 text-primary" />*/}
+                                    <img src={`https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`} className="h-5 w-5" alt='icon'/>
+                                    <span>{day.weather[0].description}</span>
                                   </div>
                                 </TableCell>
-                                <TableCell className="font-semibold">{period.temp}</TableCell>
-                                <TableCell>{period.wind}</TableCell>
-                                <TableCell>{period.humidity}</TableCell>
+                                <TableCell className="font-semibold">{Math.round(day.main.temp)}&deg;</TableCell>
+                                <TableCell>{Math.round(day.main.feels_like)}&deg;</TableCell>
+                                <TableCell>{Math.round(day.wind.speed)}</TableCell>
+                                <TableCell>{windDeg(day.wind.deg)}</TableCell>
+                                <TableCell>{day.wind.gust}</TableCell>
+                                <TableCell>{day.main.humidity}%</TableCell>
+                                <TableCell>{Math.floor((day.main.pressure * 0.75006156) * 100) / 100}</TableCell>
+                                <TableCell>{day.visibility / 1000}</TableCell>
                               </TableRow>
                             ))}
                           </TableBody>
@@ -422,57 +432,35 @@ export default function WeatherForecast() {
                             <TableRow>
                               <TableHead>Time</TableHead>
                               <TableHead>Weather</TableHead>
-                              <TableHead>Temperature</TableHead>
-                              <TableHead>Wind</TableHead>
+                              <TableHead>Temperature (&deg;C)</TableHead>
+                              <TableHead>Feels Like (&deg;C)</TableHead>
+                              <TableHead>Wind (m/s)</TableHead>
+                              <TableHead>Wind direction</TableHead>
+                              <TableHead>Wind gust</TableHead>
                               <TableHead>Humidity</TableHead>
+                              <TableHead>Pressure (mmHg)</TableHead>
+                              <TableHead>Visibility (km)</TableHead>
                             </TableRow>
                           </TableHeader>
                           <TableBody>
-                            {[
-                              {
-                                time: "12:00 PM",
-                                icon: CloudRain,
-                                temp: "19°C",
-                                wind: "18 km/h",
-                                humidity: "88%",
-                                desc: "Rain",
-                              },
-                              {
-                                time: "3:00 PM",
-                                icon: CloudRain,
-                                temp: "18°C",
-                                wind: "20 km/h",
-                                humidity: "92%",
-                                desc: "Heavy Rain",
-                              },
-                              {
-                                time: "6:00 PM",
-                                icon: CloudRain,
-                                temp: "17°C",
-                                wind: "22 km/h",
-                                humidity: "95%",
-                                desc: "Rain",
-                              },
-                              {
-                                time: "9:00 PM",
-                                icon: Cloud,
-                                temp: "16°C",
-                                wind: "18 km/h",
-                                humidity: "90%",
-                                desc: "Cloudy",
-                              },
-                            ].map((period, index) => (
+                            {day3.map((day: listItem, index) => (
                               <TableRow key={index}>
-                                <TableCell className="font-medium">{period.time}</TableCell>
+                                <TableCell className="font-medium">{timestampConversation(day.dt)}</TableCell>
                                 <TableCell>
                                   <div className="flex items-center space-x-2">
-                                    <period.icon className="h-5 w-5 text-primary" />
-                                    <span>{period.desc}</span>
+                                    {/*<hour.icon className="h-5 w-5 text-primary" />*/}
+                                    <img src={`https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`} className="h-5 w-5" alt='icon'/>
+                                    <span>{day.weather[0].description}</span>
                                   </div>
                                 </TableCell>
-                                <TableCell className="font-semibold">{period.temp}</TableCell>
-                                <TableCell>{period.wind}</TableCell>
-                                <TableCell>{period.humidity}</TableCell>
+                                <TableCell className="font-semibold">{Math.round(day.main.temp)}&deg;</TableCell>
+                                <TableCell>{Math.round(day.main.feels_like)}&deg;</TableCell>
+                                <TableCell>{Math.round(day.wind.speed)}</TableCell>
+                                <TableCell>{windDeg(day.wind.deg)}</TableCell>
+                                <TableCell>{day.wind.gust}</TableCell>
+                                <TableCell>{day.main.humidity}%</TableCell>
+                                <TableCell>{Math.floor((day.main.pressure * 0.75006156) * 100) / 100}</TableCell>
+                                <TableCell>{day.visibility / 1000}</TableCell>
                               </TableRow>
                             ))}
                           </TableBody>
@@ -491,57 +479,35 @@ export default function WeatherForecast() {
                             <TableRow>
                               <TableHead>Time</TableHead>
                               <TableHead>Weather</TableHead>
-                              <TableHead>Temperature</TableHead>
-                              <TableHead>Wind</TableHead>
+                              <TableHead>Temperature (&deg;C)</TableHead>
+                              <TableHead>Feels Like (&deg;C)</TableHead>
+                              <TableHead>Wind (m/s)</TableHead>
+                              <TableHead>Wind direction</TableHead>
+                              <TableHead>Wind gust</TableHead>
                               <TableHead>Humidity</TableHead>
+                              <TableHead>Pressure (mmHg)</TableHead>
+                              <TableHead>Visibility (km)</TableHead>
                             </TableRow>
                           </TableHeader>
                           <TableBody>
-                            {[
-                              {
-                                time: "12:00 PM",
-                                icon: Sun,
-                                temp: "26°C",
-                                wind: "10 km/h",
-                                humidity: "55%",
-                                desc: "Sunny",
-                              },
-                              {
-                                time: "3:00 PM",
-                                icon: Sun,
-                                temp: "28°C",
-                                wind: "12 km/h",
-                                humidity: "50%",
-                                desc: "Sunny",
-                              },
-                              {
-                                time: "6:00 PM",
-                                icon: Cloud,
-                                temp: "25°C",
-                                wind: "14 km/h",
-                                humidity: "60%",
-                                desc: "Partly Cloudy",
-                              },
-                              {
-                                time: "9:00 PM",
-                                icon: Cloud,
-                                temp: "22°C",
-                                wind: "12 km/h",
-                                humidity: "65%",
-                                desc: "Cloudy",
-                              },
-                            ].map((period, index) => (
+                            {day4.map((day, index) => (
                               <TableRow key={index}>
-                                <TableCell className="font-medium">{period.time}</TableCell>
+                                <TableCell className="font-medium">{timestampConversation(day.dt)}</TableCell>
                                 <TableCell>
                                   <div className="flex items-center space-x-2">
-                                    <period.icon className="h-5 w-5 text-primary" />
-                                    <span>{period.desc}</span>
+                                    {/*<hour.icon className="h-5 w-5 text-primary" />*/}
+                                    <img src={`https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`} className="h-5 w-5" alt='icon'/>
+                                    <span>{day.weather[0].description}</span>
                                   </div>
                                 </TableCell>
-                                <TableCell className="font-semibold">{period.temp}</TableCell>
-                                <TableCell>{period.wind}</TableCell>
-                                <TableCell>{period.humidity}</TableCell>
+                                <TableCell className="font-semibold">{Math.round(day.main.temp)}&deg;</TableCell>
+                                <TableCell>{Math.round(day.main.feels_like)}&deg;</TableCell>
+                                <TableCell>{Math.round(day.wind.speed)}</TableCell>
+                                <TableCell>{windDeg(day.wind.deg)}</TableCell>
+                                <TableCell>{day.wind.gust}</TableCell>
+                                <TableCell>{day.main.humidity}%</TableCell>
+                                <TableCell>{Math.floor((day.main.pressure * 0.75006156) * 100) / 100}</TableCell>
+                                <TableCell>{day.visibility / 1000}</TableCell>
                               </TableRow>
                             ))}
                           </TableBody>
@@ -560,57 +526,35 @@ export default function WeatherForecast() {
                             <TableRow>
                               <TableHead>Time</TableHead>
                               <TableHead>Weather</TableHead>
-                              <TableHead>Temperature</TableHead>
-                              <TableHead>Wind</TableHead>
+                              <TableHead>Temperature (&deg;C)</TableHead>
+                              <TableHead>Feels Like (&deg;C)</TableHead>
+                              <TableHead>Wind (m/s)</TableHead>
+                              <TableHead>Wind direction</TableHead>
+                              <TableHead>Wind gust</TableHead>
                               <TableHead>Humidity</TableHead>
+                              <TableHead>Pressure (mmHg)</TableHead>
+                              <TableHead>Visibility (km)</TableHead>
                             </TableRow>
                           </TableHeader>
                           <TableBody>
-                            {[
-                              {
-                                time: "12:00 PM",
-                                icon: Cloud,
-                                temp: "23°C",
-                                wind: "16 km/h",
-                                humidity: "68%",
-                                desc: "Cloudy",
-                              },
-                              {
-                                time: "3:00 PM",
-                                icon: Sun,
-                                temp: "25°C",
-                                wind: "14 km/h",
-                                humidity: "62%",
-                                desc: "Partly Sunny",
-                              },
-                              {
-                                time: "6:00 PM",
-                                icon: Sun,
-                                temp: "24°C",
-                                wind: "12 km/h",
-                                humidity: "58%",
-                                desc: "Sunny",
-                              },
-                              {
-                                time: "9:00 PM",
-                                icon: Cloud,
-                                temp: "21°C",
-                                wind: "10 km/h",
-                                humidity: "70%",
-                                desc: "Partly Cloudy",
-                              },
-                            ].map((period, index) => (
+                            {day5.map((day: listItem, index) => (
                               <TableRow key={index}>
-                                <TableCell className="font-medium">{period.time}</TableCell>
+                                <TableCell className="font-medium">{timestampConversation(day.dt)}</TableCell>
                                 <TableCell>
                                   <div className="flex items-center space-x-2">
-                                    <period.icon className="h-5 w-5 text-primary" />
-                                    <span>{period.desc}</span>
+                                    {/*<hour.icon className="h-5 w-5 text-primary" />*/}
+                                    <img src={`https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`} className="h-5 w-5" alt='icon'/>
+                                    <span>{day.weather[0].description}</span>
                                   </div>
                                 </TableCell>
-                                <TableCell className="font-semibold">{period.temp}</TableCell>
-                                <TableCell>{period.wind}</TableCell>
-                                <TableCell>{period.humidity}</TableCell>
+                                <TableCell className="font-semibold">{Math.round(day.main.temp)}&deg;</TableCell>
+                                <TableCell>{Math.round(day.main.feels_like)}&deg;</TableCell>
+                                <TableCell>{Math.round(day.wind.speed)}</TableCell>
+                                <TableCell>{windDeg(day.wind.deg)}</TableCell>
+                                <TableCell>{day.wind.gust}</TableCell>
+                                <TableCell>{day.main.humidity}%</TableCell>
+                                <TableCell>{Math.floor((day.main.pressure * 0.75006156) * 100) / 100}</TableCell>
+                                <TableCell>{day.visibility / 1000}</TableCell>
                               </TableRow>
                             ))}
                           </TableBody>
