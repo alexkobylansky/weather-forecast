@@ -266,7 +266,6 @@ export default function WeatherForecast() {
                       <TableHeader>
                         <TableRow>
                           <TableHead>Time</TableHead>
-                          {/*icon + description*/}
                           <TableHead>Weather</TableHead>
                           <TableHead>Temperature (&deg;C)</TableHead>
                           <TableHead>Feels Like (&deg;C)</TableHead>
