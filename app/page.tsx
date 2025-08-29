@@ -10,6 +10,9 @@ import {Cloud, Cloudy, Sun, CloudRain, CloudDrizzle, CloudFog, CloudHail, CloudL
 
 import {initMap, getCurrentWeather, getForecastWeather, getOneCallAPI} from "@/services/weather-services";
 
+import {dailyItem, hourlyItem, OneCall} from "@/types/one-call";
+import {listItem, ForecastWeather} from "@/types/forecast-weather";
+
 const currentDate: Date = new Date();
 let getDay = (time: number) => new Date(time);
 
