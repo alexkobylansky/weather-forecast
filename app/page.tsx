@@ -375,9 +375,6 @@ export default function WeatherForecast() {
                   </TabsContent>
                   <TabsContent value="day2" className="mt-6">
                     <Card>
-                      <CardHeader>
-                        <CardTitle>Tomorrow - March 16, 2024</CardTitle>
-                      </CardHeader>
                       <CardContent className="p-0">
                         <Table>
                           <TableHeader>
@@ -422,9 +419,6 @@ export default function WeatherForecast() {
                   </TabsContent>
                   <TabsContent value="day3" className="mt-6">
                     <Card>
-                      <CardHeader>
-                        <CardTitle>Wednesday - March 17, 2024</CardTitle>
-                      </CardHeader>
                       <CardContent className="p-0">
                         <Table>
                           <TableHeader>
@@ -469,9 +463,6 @@ export default function WeatherForecast() {
                   </TabsContent>
                   <TabsContent value="day4" className="mt-6">
                     <Card>
-                      <CardHeader>
-                        <CardTitle>Thursday - March 18, 2024</CardTitle>
-                      </CardHeader>
                       <CardContent className="p-0">
                         <Table>
                           <TableHeader>
@@ -516,9 +507,6 @@ export default function WeatherForecast() {
                   </TabsContent>
                   <TabsContent value="day5" className="mt-6">
                     <Card>
-                      <CardHeader>
-                        <CardTitle>Friday - March 19, 2024</CardTitle>
-                      </CardHeader>
                       <CardContent className="p-0">
                         <Table>
                           <TableHeader>
