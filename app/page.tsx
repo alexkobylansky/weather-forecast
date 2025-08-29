@@ -16,10 +16,10 @@ import {listItem, ForecastWeather} from "@/types/forecast-weather";
 const currentDate: Date = new Date();
 let getDay = (time: number) => new Date(time);
 
-const monthsRus = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
+const monthsUkr = ['Січень', 'Лютий', 'Березень', 'Квітень', 'Травень', 'Червень', 'Липень', 'Серпень', 'Вересень', 'Жовтень', 'Листопад', 'Грудень'];
 const monthsEng = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-const dayRu = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
+const daysUkr = ['Нд', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
 const dayEng = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 const timestampConversation = (t: number) => {
@@ -32,13 +32,13 @@ const timestampConversation = (t: number) => {
 };
 
 const windDeg = (deg: number) => {
-  if (deg >= 0 || deg <= 22.5 && deg >= 337.5 || deg <= 360) return 'северный'
-  else if (deg >= 22.6 || deg <= 67.5) return 'северо-восточный'
-  else if (deg >= 67.6 || deg <= 112.5) return 'восточный'
-  else if (deg >= 112.6 || deg <= 157.5) return 'юго-восточный'
-  else if (deg >= 157.6 || deg <= 202.5) return 'южный'
-  else if (deg >= 202.6 || deg <= 277.5) return 'юго-западный'
-  else if (deg >= 277.6 || deg <= 282.5) return 'западный'
+  if (deg >= 0 || deg <= 22.5 && deg >= 337.5 || deg <= 360) return 'північний'
+  else if (deg >= 22.6 || deg <= 67.5) return 'північно-східний'
+  else if (deg >= 67.6 || deg <= 112.5) return 'східний'
+  else if (deg >= 112.6 || deg <= 157.5) return 'південно-східний'
+  else if (deg >= 157.6 || deg <= 202.5) return 'південний'
+  else if (deg >= 202.6 || deg <= 277.5) return 'південно-західний'
+  else if (deg >= 277.6 || deg <= 282.5) return 'західний'
 };
 
 const getDuration = (sunrise: number, sunset: number) => {
