@@ -279,32 +279,27 @@ export default function WeatherForecast() {
                         </TableRow>
                       </TableHeader>
                       <TableBody>
-                        {oneCallApi?.hourly.map((item, index) => {
-                          if (item.dt > timestampSeconds) {
-                            return
-                          }
-                          return (
-                            <TableRow key={index}>
-                              <TableCell className="font-medium">{timestampConversation(item.dt)}</TableCell>
-                              <TableCell>
-                                <div className="flex items-center space-x-2">
-                                  {/*<hour.icon className="h-5 w-5 text-primary" />*/}
-                                  <img src={`https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`} className="h-5 w-5" alt='icon'/>
-                                  <span>{item.weather[0].description}</span>
-                                </div>
-                              </TableCell>
-                              <TableCell className="font-semibold">{Math.round(item.temp)}&deg;</TableCell>
-                              <TableCell>{Math.round(item.feels_like)}&deg;</TableCell>
-                              <TableCell>{Math.round(item.wind_speed)}</TableCell>
-                              <TableCell>{windDeg(item.wind_deg)}</TableCell>
-                              <TableCell>{item.wind_gust}</TableCell>
-                              <TableCell>{item.dew_point}&deg;</TableCell>
-                              <TableCell>{item.humidity}%</TableCell>
-                              <TableCell>{Math.floor((item.pressure * 0.75006156) * 100) / 100}</TableCell>
-                              <TableCell>{item.visibility / 1000}</TableCell>
-                            </TableRow>
-                          )
-                        })}
+                        {currentHourlyForecast.map((item, index) => (
+                          <TableRow key={index}>
+                            <TableCell className="font-medium">{timestampConversation(item.dt)}</TableCell>
+                            <TableCell>
+                              <div className="flex items-center space-x-2">
+                                {/*<hour.icon className="h-5 w-5 text-primary" />*/}
+                                <img src={`https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`} className="h-5 w-5" alt='icon'/>
+                                <span>{item.weather[0].description}</span>
+                              </div>
+                            </TableCell>
+                            <TableCell className="font-semibold">{Math.round(item.temp)}&deg;</TableCell>
+                            <TableCell>{Math.round(item.feels_like)}&deg;</TableCell>
+                            <TableCell>{Math.round(item.wind_speed)}</TableCell>
+                            <TableCell>{windDeg(item.wind_deg)}</TableCell>
+                            <TableCell>{item.wind_gust}</TableCell>
+                            <TableCell>{item.dew_point}&deg;</TableCell>
+                            <TableCell>{item.humidity}%</TableCell>
+                            <TableCell>{Math.floor((item.pressure * 0.75006156) * 100) / 100}</TableCell>
+                            <TableCell>{item.visibility / 1000}</TableCell>
+                          </TableRow>
+                        ))}
                       </TableBody>
                     </Table>
                   </CardContent>
