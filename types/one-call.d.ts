@@ -1,4 +1,4 @@
-interface hourlyItem {
+export interface hourlyItem {
   dt: number;
   temp: number;
   feels_like: number;
@@ -63,7 +63,7 @@ interface dailyItem {
   uvi: number;
 }
 
-declare interface OneCall {
+export interface OneCall {
   lat: number;
   lon: number;
   timezone: string;

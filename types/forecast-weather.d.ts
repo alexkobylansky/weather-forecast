@@ -1,4 +1,4 @@
-interface listItem {
+export interface listItem {
   dt: number;
   main: {
     temp: number;
@@ -34,7 +34,7 @@ interface listItem {
   },
   dt_txt: string;
 }
-declare interface ForecastWeather {
+export interface ForecastWeather {
   cod: string;
   message: number;
   cnt: number;
