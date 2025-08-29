@@ -59,9 +59,12 @@ export default function WeatherForecast() {
   const [oneCallApi, setOneCallApi] = useState<OneCall>({} as OneCall);
 
   const getPosition = async (lat: number, lon: number) => {
-    setCurrentWeather(await getCurrentWeather(lat, lon));
-    setForeCastWeather(await  getForecastWeather(lat, lon))
-    setOneCallApi(await getOneCallAPI(lat, lon));
+    const currentWeather = await getCurrentWeather(lat, lon);
+    const forecastWeather = await getForecastWeather(lat, lon);
+    const oneCallWeather = await getOneCallAPI(lat, lon)
+    setCurrentWeather(currentWeather);
+    setForeCastWeather(forecastWeather);
+    setOneCallApi(oneCallWeather);
   };
 
   const getLocation = () => {
