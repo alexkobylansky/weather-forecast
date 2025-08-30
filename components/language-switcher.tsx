@@ -15,7 +15,8 @@ export function LanguageSwitcher() {
 
   const handleLanguageChange = (lang: "en" | "uk") => {
     setCurrentLanguage(lang)
-
+    // Here you would typically integrate with your i18n solution
+    console.log(`[v0] Language changed to: ${lang}`)
   }
 
   return (
