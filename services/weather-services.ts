@@ -113,7 +113,7 @@ async function getPlace(lat: number, lon: number) {
 
     const place = await response.json();
 
-    return place.results[7].address_components[0].long_name;
+    return place.results[0].address_components[2].long_name;
   } catch (error: any) {
     console.error('Fetch error:', error.message);
     throw error;
