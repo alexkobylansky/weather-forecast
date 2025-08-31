@@ -1,7 +1,7 @@
 import * as React from 'react'
 import type { Metadata } from 'next'
 import './globals.css'
-import ClientWrapper from "@/components/client-wrapper";
+import ClientWrapper from '@/components/client-wrapper';
 import { notFound } from 'next/navigation'
 import { locales } from '@/i18n'
 

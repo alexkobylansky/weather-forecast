@@ -99,8 +99,8 @@ async function getCurrentWeather(lat: number, lon: number): Promise<CurrentWeath
 async function getPlace(lat: number, lon: number) {
   const params = new URLSearchParams({
     latlng: `${lat},${lon}`,
-    language: "uk",
-    key: "AIzaSyBP6TTt_WvIbUp5gx0n5niy6wyC175FUhs"
+    language: 'uk',
+    key: 'AIzaSyBP6TTt_WvIbUp5gx0n5niy6wyC175FUhs'
   });
   const url = `https://maps.googleapis.com/maps/api/geocode/json?${params}`;
 

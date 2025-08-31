@@ -10,6 +10,7 @@ export default function RootLayout({
   children: React.ReactNode,
   params: { locale: string }
 }) {
+  //TODO Fix this
   const locale = params.locale;
 
   return (
