@@ -7,7 +7,8 @@ import {Tabs, TabsContent, TabsList, TabsTrigger} from '@/components/ui/tabs';
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from '@/components/ui/table';
 import {LanguageSwitcher} from '@/components/language-switcher';
 import { useTranslations } from 'next-intl'
-import {Cloud, Cloudy, Sun, CloudRain, CloudDrizzle, CloudFog, CloudHail, CloudLightning, CloudMoon, CloudMoonRain, CloudRainWind, CloudSnow, CloudSun, CloudSunRain, Wind, Eye, Thermometer, Sunrise, Sunset, Clock, Moon, Droplet} from "lucide-react";
+import { useLocale } from 'next-intl'
+import {Cloud, Cloudy, Sun, CloudRain, CloudDrizzle, CloudFog, CloudHail, CloudLightning, CloudMoon, CloudMoonRain, CloudRainWind, CloudSnow, CloudSun, CloudSunRain, Wind, Eye, Thermometer, Sunrise, Sunset, Clock, Moon, Droplet} from 'lucide-react';
 
 import {initMap, getCurrentWeather, getForecastWeather, getOneCallAPI} from '@/services/weather-services';
 
@@ -32,16 +33,6 @@ const timestampConversation = (t: number) => {
   return `${hour}:${minute}`
 };
 
-const windDeg = (deg: number) => {
-  if ((deg >= 0 && deg <= 22.5) || (deg >= 337.5 && deg <= 360)) return 'північний'
-  else if (deg >= 22.6 || deg <= 67.5) return 'північно-східний'
-  else if (deg >= 67.6 || deg <= 112.5) return 'східний'
-  else if (deg >= 112.6 || deg <= 157.5) return 'південно-східний'
-  else if (deg >= 157.6 || deg <= 202.5) return 'південний'
-  else if (deg >= 202.6 || deg <= 277.5) return 'південно-західний'
-  else if (deg >= 277.6 || deg <= 282.5) return 'західний'
-};
-
 const getDuration = (sunrise: number, sunset: number) => {
   const sunRise = getDay(sunrise).getTime();
   const sunSet = getDay(sunset).getTime();
@@ -60,6 +51,18 @@ export default function WeatherForecast() {
   const [oneCallApi, setOneCallApi] = useState<OneCall>({} as OneCall);
 
   const t = useTranslations();
+
+  const currentLocale = useLocale();
+
+  const windDeg = (deg: number) => {
+    if ((deg >= 0 && deg <= 22.5) || (deg >= 337.5 && deg <= 360)) return currentLocale === 'uk' ? 'північний' : 'north'
+    else if (deg >= 22.6 || deg <= 67.5) return currentLocale === 'uk' ? 'північно-східний' : 'north-east'
+    else if (deg >= 67.6 || deg <= 112.5) return currentLocale === 'uk' ? 'східний' : 'east'
+    else if (deg >= 112.6 || deg <= 157.5) return currentLocale === 'uk' ? 'південно-східний' : 'south-east'
+    else if (deg >= 157.6 || deg <= 202.5) return currentLocale === 'uk' ? 'південний' : 'south'
+    else if (deg >= 202.6 || deg <= 277.5) return currentLocale === 'uk' ? 'південно-західний' : 'south-west'
+    else if (deg >= 277.6 || deg <= 282.5) return currentLocale === 'uk' ? 'західний' : 'west'
+  };
 
   const getPosition = async (lat: number, lon: number) => {
     const currentWeather = await getCurrentWeather(lat, lon);
