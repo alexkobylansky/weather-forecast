@@ -1,22 +1,31 @@
 "use client"
-
+import { useRouter, usePathname } from 'next/navigation'
+import { useLocale } from 'next-intl'
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Globe } from "lucide-react"
 
 export function LanguageSwitcher() {
-  const [currentLanguage, setCurrentLanguage] = useState<"en" | "uk">("en")
+  const router = useRouter()
+  const pathname = usePathname()
+  const currentLocale = useLocale()
+  // @ts-ignore
+  const [currentLanguage, setCurrentLanguage] = useState<"en" | "uk">(currentLocale);
 
   const languages = {
     en: { name: "English", flag: "🇺🇸" },
     uk: { name: "Українська", flag: "🇺🇦" },
-  }
+  };
+
+  console.log("currentLocale: ", currentLocale);
 
   const handleLanguageChange = (lang: "en" | "uk") => {
-    setCurrentLanguage(lang)
-    // Here you would typically integrate with your i18n solution
-    console.log(`[v0] Language changed to: ${lang}`)
+    setCurrentLanguage(lang);
+    const segments = pathname.split('/');
+    segments[1] = lang; // заменяем локаль в URL
+    const newPath = segments.join('/');
+    router.push(newPath);
   }
 
   return (
