@@ -1,18 +1,18 @@
-"use client"
-import {useEffect, useState} from "react";
-import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
-import {Button} from "@/components/ui/button";
-import {Input} from "@/components/ui/input";
-import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/tabs";
-import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table";
-import {LanguageSwitcher} from "@/components/language-switcher";
+'use client'
+import {useEffect, useState} from 'react';
+import {Card, CardContent, CardHeader, CardTitle} from '@/components/ui/card';
+import {Button} from '@/components/ui/button';
+import {Input} from '@/components/ui/input';
+import {Tabs, TabsContent, TabsList, TabsTrigger} from '@/components/ui/tabs';
+import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from '@/components/ui/table';
+import {LanguageSwitcher} from '@/components/language-switcher';
 import { useTranslations } from 'next-intl'
 import {Cloud, Cloudy, Sun, CloudRain, CloudDrizzle, CloudFog, CloudHail, CloudLightning, CloudMoon, CloudMoonRain, CloudRainWind, CloudSnow, CloudSun, CloudSunRain, Wind, Eye, Thermometer, Sunrise, Sunset, Clock, Moon, Droplet} from "lucide-react";
 
-import {initMap, getCurrentWeather, getForecastWeather, getOneCallAPI} from "@/services/weather-services";
+import {initMap, getCurrentWeather, getForecastWeather, getOneCallAPI} from '@/services/weather-services';
 
-import {dailyItem, hourlyItem, OneCall} from "@/types/one-call";
-import {listItem, ForecastWeather} from "@/types/forecast-weather";
+import {dailyItem, hourlyItem, OneCall} from '@/types/one-call';
+import {listItem, ForecastWeather} from '@/types/forecast-weather';
 
 const currentDate: Date = new Date();
 let getDay = (time: number) => new Date(time);
@@ -144,63 +144,63 @@ export default function WeatherForecast() {
     return <div><p>Loading...</p></div>
   } else {
     return (
-      <div className="min-h-screen bg-background">
+      <div className='min-h-screen bg-background'>
         {/* Header */}
-        <header className="sticky top-0 z-50 bg-primary/95 backdrop-blur supports-[backdrop-filter]:bg-primary/60 border-b border-primary/20">
-          <div className="container mx-auto px-4 py-4">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-2">
-                <Cloud className="h-8 w-8 text-primary-foreground"/>
-                <h1 className="text-2xl font-serif font-black text-primary-foreground">WeatherCast</h1>
+        <header className='sticky top-0 z-50 bg-primary/95 backdrop-blur supports-[backdrop-filter]:bg-primary/60 border-b border-primary/20'>
+          <div className='container mx-auto px-4 py-4'>
+            <div className='flex items-center justify-between'>
+              <div className='flex items-center space-x-2'>
+                <Cloud className='h-8 w-8 text-primary-foreground'/>
+                <h1 className='text-2xl font-serif font-black text-primary-foreground'>WeatherCast</h1>
               </div>
-              <div className="flex-1 max-w-md mx-8">
-                <div className="relative">
+              <div className='flex-1 max-w-md mx-8'>
+                <div className='relative'>
                   <Input
-                    placeholder="Search for a city..."
-                    className="bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/70"
+                    placeholder='Search for a city...'
+                    className='bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/70'
                   />
-                  <Button size="sm" className="absolute right-1 top-1 bg-accent hover:bg-accent/90">
+                  <Button size='sm' className='absolute right-1 top-1 bg-accent hover:bg-accent/90'>
                     Search
                   </Button>
                 </div>
               </div>
-              <div className="flex items-center space-x-2">
+              <div className='flex items-center space-x-2'>
                 <LanguageSwitcher/>
-                <Button variant="ghost" className="text-primary-foreground hover:bg-primary-foreground/10">
+                <Button variant='ghost' className='text-primary-foreground hover:bg-primary-foreground/10'>
                   Settings
                 </Button>
               </div>
             </div>
           </div>
         </header>
-        <main className="container mx-auto px-4 py-8">
-          <Tabs defaultValue="current" className="w-full">
-            <TabsList className="grid w-full grid-cols-2 mb-8">
-              <TabsTrigger value="current">Current Weather & Hourly</TabsTrigger>
-              <TabsTrigger value="forecast">5-Day Forecast</TabsTrigger>
+        <main className='container mx-auto px-4 py-8'>
+          <Tabs defaultValue='current' className='w-full'>
+            <TabsList className='grid w-full grid-cols-2 mb-8'>
+              <TabsTrigger value='current'>Current Weather & Hourly</TabsTrigger>
+              <TabsTrigger value='forecast'>5-Day Forecast</TabsTrigger>
             </TabsList>
-            <TabsContent value="current">
+            <TabsContent value='current'>
               {/* Current Weather Section */}
-              <section className="mb-12">
-                <Card className="bg-card border-border shadow-lg">
-                  <CardHeader className="text-center pb-4">
-                    <table className="current-weather-table">
+              <section className='mb-12'>
+                <Card className='bg-card border-border shadow-lg'>
+                  <CardHeader className='text-center pb-4'>
+                    <table className='current-weather-table'>
                       <tbody>
                       <tr>
                         <td>
                           <img src={`https://openweathermap.org/img/wn/${currentWeather?.weather[0].icon}@2x.png`} alt='icon'/>
                         </td>
                         <td>
-                          <CardTitle className="text-6xl font-serif font-black text-foreground mb-2">{Math.round(currentWeather?.main.temp)}°C</CardTitle>
+                          <CardTitle className='text-6xl font-serif font-black text-foreground mb-2'>{Math.round(currentWeather?.main.temp)}°C</CardTitle>
                         </td>
                       </tr>
                       <tr>
                         <td>
-                          <p className="text-xl text-muted-foreground">{currentWeather?.weather[0].description}</p>
+                          <p className='text-xl text-muted-foreground'>{currentWeather?.weather[0].description}</p>
                         </td>
                         <td>
-                          <p className="text-sm text-muted-foreground">Feels like</p>
-                          <p className="font-semibold">{Math.round(currentWeather?.main.feels_like)}°C</p>
+                          <p className='text-sm text-muted-foreground'>Feels like</p>
+                          <p className='font-semibold'>{Math.round(currentWeather?.main.feels_like)}°C</p>
                         </td>
                       </tr>
                       <tr>
@@ -212,48 +212,48 @@ export default function WeatherForecast() {
                     </table>
                   </CardHeader>
                   <CardContent>
-                    <div className="flex flex-row justify-center flex-wrap w-full gap-4">
-                      <div className="flex items-center grow justify-center  space-x-2 p-3 rounded-lg bg-muted">
-                        <Sunrise className="h-5 w-5 text-primary"/>
+                    <div className='flex flex-row justify-center flex-wrap w-full gap-4'>
+                      <div className='flex items-center grow justify-center  space-x-2 p-3 rounded-lg bg-muted'>
+                        <Sunrise className='h-5 w-5 text-primary'/>
                         <div>
-                          <p className="text-sm text-muted-foreground">Sunrise</p>
-                          <p className="font-semibold">{timestampConversation(currentWeather?.sys.sunrise)}</p>
+                          <p className='text-sm text-muted-foreground'>Sunrise</p>
+                          <p className='font-semibold'>{timestampConversation(currentWeather?.sys.sunrise)}</p>
                         </div>
                       </div>
-                      <div className="flex items-center grow justify-center  space-x-2 p-3 rounded-lg bg-muted">
-                        <Sunset className="h-5 w-5 text-primary"/>
+                      <div className='flex items-center grow justify-center  space-x-2 p-3 rounded-lg bg-muted'>
+                        <Sunset className='h-5 w-5 text-primary'/>
                         <div>
-                          <p className="text-sm text-muted-foreground">Sunset</p>
-                          <p className="font-semibold">{timestampConversation(currentWeather?.sys.sunset)}</p>
+                          <p className='text-sm text-muted-foreground'>Sunset</p>
+                          <p className='font-semibold'>{timestampConversation(currentWeather?.sys.sunset)}</p>
                         </div>
                       </div>
-                      <div className="flex items-center grow justify-center  space-x-2 p-3 rounded-lg bg-muted">
-                        <Clock className="h-5 w-5 text-primary"/>
+                      <div className='flex items-center grow justify-center  space-x-2 p-3 rounded-lg bg-muted'>
+                        <Clock className='h-5 w-5 text-primary'/>
                         <div>
-                          <p className="text-sm text-muted-foreground">Day length</p>
-                          <p className="font-semibold">{getDuration(currentWeather?.sys?.sunrise, currentWeather?.sys.sunset)}</p>
+                          <p className='text-sm text-muted-foreground'>Day length</p>
+                          <p className='font-semibold'>{getDuration(currentWeather?.sys?.sunrise, currentWeather?.sys.sunset)}</p>
                         </div>
                       </div>
-                      <div className="flex items-center grow justify-center  space-x-2 p-3 rounded-lg bg-muted">
-                        <Eye className="h-5 w-5 text-primary"/>
+                      <div className='flex items-center grow justify-center  space-x-2 p-3 rounded-lg bg-muted'>
+                        <Eye className='h-5 w-5 text-primary'/>
                         <div>
-                          <p className="text-sm text-muted-foreground">Visibility</p>
-                          <p className="font-semibold">{(currentWeather?.visibility / 1000)} km</p>
+                          <p className='text-sm text-muted-foreground'>Visibility</p>
+                          <p className='font-semibold'>{(currentWeather?.visibility / 1000)} km</p>
                         </div>
                       </div>
-                      <div className="flex items-center grow justify-center  space-x-2 p-3 rounded-lg bg-muted">
-                        <Wind className="h-5 w-5 text-primary"/>
+                      <div className='flex items-center grow justify-center  space-x-2 p-3 rounded-lg bg-muted'>
+                        <Wind className='h-5 w-5 text-primary'/>
                         <div>
-                          <p className="text-sm text-muted-foreground">{t("wind")}</p>
-                          <p className="font-semibold">{currentWeather?.wind.speed} м/с</p>
-                          <p className="text-sm text-muted-foreground">{windDeg(currentWeather?.wind.deg)}</p>
+                          <p className='text-sm text-muted-foreground'>{t('wind')}</p>
+                          <p className='font-semibold'>{currentWeather?.wind.speed} м/с</p>
+                          <p className='text-sm text-muted-foreground'>{windDeg(currentWeather?.wind.deg)}</p>
                         </div>
                       </div>
-                      <div className="flex items-center grow justify-center  space-x-2 p-3 rounded-lg bg-muted">
-                        <Droplet className="h-5 w-5 text-primary"/>
+                      <div className='flex items-center grow justify-center  space-x-2 p-3 rounded-lg bg-muted'>
+                        <Droplet className='h-5 w-5 text-primary'/>
                         <div>
-                          <p className="text-sm text-muted-foreground">Humidity</p>
-                          <p className="font-semibold">{currentWeather?.main.humidity} %</p>
+                          <p className='text-sm text-muted-foreground'>Humidity</p>
+                          <p className='font-semibold'>{currentWeather?.main.humidity} %</p>
                         </div>
                       </div>
                     </div>
@@ -262,9 +262,9 @@ export default function WeatherForecast() {
               </section>
               {/* Hourly Forecast Table */}
               <section>
-                <h2 className="text-3xl font-serif font-bold text-foreground mb-6">Hourly Forecast</h2>
+                <h2 className='text-3xl font-serif font-bold text-foreground mb-6'>Hourly Forecast</h2>
                 <Card>
-                  <CardContent className="p-0">
+                  <CardContent className='p-0'>
                     <Table>
                       <TableHeader>
                         <TableRow>
@@ -284,15 +284,15 @@ export default function WeatherForecast() {
                       <TableBody>
                         {currentHourlyForecast.map((item, index) => (
                           <TableRow key={index}>
-                            <TableCell className="font-medium">{timestampConversation(item.dt)}</TableCell>
+                            <TableCell className='font-medium'>{timestampConversation(item.dt)}</TableCell>
                             <TableCell>
-                              <div className="flex items-center space-x-2">
-                                {/*<hour.icon className="h-5 w-5 text-primary" />*/}
-                                <img src={`https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`} className="h-5 w-5" alt='icon'/>
+                              <div className='flex items-center space-x-2'>
+                                {/*<hour.icon className='h-5 w-5 text-primary' />*/}
+                                <img src={`https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`} className='h-5 w-5' alt='icon'/>
                                 <span>{item.weather[0].description}</span>
                               </div>
                             </TableCell>
-                            <TableCell className="font-semibold">{Math.round(item.temp)}&deg;</TableCell>
+                            <TableCell className='font-semibold'>{Math.round(item.temp)}&deg;</TableCell>
                             <TableCell>{Math.round(item.feels_like)}&deg;</TableCell>
                             <TableCell>{Math.round(item.wind_speed)}</TableCell>
                             <TableCell>{windDeg(item.wind_deg)}</TableCell>
@@ -309,32 +309,32 @@ export default function WeatherForecast() {
                 </Card>
               </section>
             </TabsContent>
-            <TabsContent value="forecast">
+            <TabsContent value='forecast'>
               <section>
-                <h2 className="text-3xl font-serif font-bold text-foreground mb-6">5-Day Forecast</h2>
-                <Tabs defaultValue="day1" className="w-full">
-                  <TabsList className="grid w-full grid-cols-5">
+                <h2 className='text-3xl font-serif font-bold text-foreground mb-6'>5-Day Forecast</h2>
+                <Tabs defaultValue='day1' className='w-full'>
+                  <TabsList className='grid w-full grid-cols-5'>
                     {oneCallApi.daily.map((day: dailyItem, index) => {
                       if (day.dt >= startDay1 && day.dt <= endDay5) {
                         let currentMonth = getDay((day.dt) * 1000).getMonth();
                         let currentDay = getDay((day.dt) * 1000).getDate();
                         return (
                           <TabsTrigger key={index} value={`day${index}`}>
-                            <div className="forecast-day-block">
+                            <div className='forecast-day-block'>
                               <h3>{daysUkr[getDay(day.dt * 1000).getDay()]}</h3>
-                              <span className="forecast-day-date">{monthsUkr[currentMonth]} {currentDay}</span>
-                              <span className="forecast-day-icon"><img src={`https://openweathermap.org/img/wn/${day.weather['0'].icon}@2x.png`} alt="icon"/></span>
-                              <span className="forecast-day-temperature">{Math.floor(day.temp.max)}&deg;C</span><br/>
-                              <span className="forecast-day-description">{day.weather[0].description}</span>
+                              <span className='forecast-day-date'>{monthsUkr[currentMonth]} {currentDay}</span>
+                              <span className='forecast-day-icon'><img src={`https://openweathermap.org/img/wn/${day.weather['0'].icon}@2x.png`} alt='icon'/></span>
+                              <span className='forecast-day-temperature'>{Math.floor(day.temp.max)}&deg;C</span><br/>
+                              <span className='forecast-day-description'>{day.weather[0].description}</span>
                             </div>
                           </TabsTrigger>
                         )
                       }
                     })}
                   </TabsList>
-                  <TabsContent value="day1" className="mt-6">
+                  <TabsContent value='day1' className='mt-6'>
                     <Card>
-                      <CardContent className="p-0">
+                      <CardContent className='p-0'>
                         <Table>
                           <TableHeader>
                             <TableRow>
@@ -353,15 +353,15 @@ export default function WeatherForecast() {
                           <TableBody>
                             {day1.map((day: listItem, index) => (
                               <TableRow key={index}>
-                                <TableCell className="font-medium">{timestampConversation(day.dt)}</TableCell>
+                                <TableCell className='font-medium'>{timestampConversation(day.dt)}</TableCell>
                                 <TableCell>
-                                  <div className="flex items-center space-x-2">
-                                    {/*<hour.icon className="h-5 w-5 text-primary" />*/}
-                                    <img src={`https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`} className="h-5 w-5" alt='icon'/>
+                                  <div className='flex items-center space-x-2'>
+                                    {/*<hour.icon className='h-5 w-5 text-primary' />*/}
+                                    <img src={`https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`} className='h-5 w-5' alt='icon'/>
                                     <span>{day.weather[0].description}</span>
                                   </div>
                                 </TableCell>
-                                <TableCell className="font-semibold">{Math.round(day.main.temp)}&deg;</TableCell>
+                                <TableCell className='font-semibold'>{Math.round(day.main.temp)}&deg;</TableCell>
                                 <TableCell>{Math.round(day.main.feels_like)}&deg;</TableCell>
                                 <TableCell>{Math.round(day.wind.speed)}</TableCell>
                                 <TableCell>{windDeg(day.wind.deg)}</TableCell>
@@ -376,9 +376,9 @@ export default function WeatherForecast() {
                       </CardContent>
                     </Card>
                   </TabsContent>
-                  <TabsContent value="day2" className="mt-6">
+                  <TabsContent value='day2' className='mt-6'>
                     <Card>
-                      <CardContent className="p-0">
+                      <CardContent className='p-0'>
                         <Table>
                           <TableHeader>
                             <TableRow>
@@ -397,15 +397,15 @@ export default function WeatherForecast() {
                           <TableBody>
                             {day2.map((day: listItem, index) => (
                               <TableRow key={index}>
-                                <TableCell className="font-medium">{timestampConversation(day.dt)}</TableCell>
+                                <TableCell className='font-medium'>{timestampConversation(day.dt)}</TableCell>
                                 <TableCell>
-                                  <div className="flex items-center space-x-2">
-                                    {/*<hour.icon className="h-5 w-5 text-primary" />*/}
-                                    <img src={`https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`} className="h-5 w-5" alt='icon'/>
+                                  <div className='flex items-center space-x-2'>
+                                    {/*<hour.icon className='h-5 w-5 text-primary' />*/}
+                                    <img src={`https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`} className='h-5 w-5' alt='icon'/>
                                     <span>{day.weather[0].description}</span>
                                   </div>
                                 </TableCell>
-                                <TableCell className="font-semibold">{Math.round(day.main.temp)}&deg;</TableCell>
+                                <TableCell className='font-semibold'>{Math.round(day.main.temp)}&deg;</TableCell>
                                 <TableCell>{Math.round(day.main.feels_like)}&deg;</TableCell>
                                 <TableCell>{Math.round(day.wind.speed)}</TableCell>
                                 <TableCell>{windDeg(day.wind.deg)}</TableCell>
@@ -420,9 +420,9 @@ export default function WeatherForecast() {
                       </CardContent>
                     </Card>
                   </TabsContent>
-                  <TabsContent value="day3" className="mt-6">
+                  <TabsContent value='day3' className='mt-6'>
                     <Card>
-                      <CardContent className="p-0">
+                      <CardContent className='p-0'>
                         <Table>
                           <TableHeader>
                             <TableRow>
@@ -441,15 +441,15 @@ export default function WeatherForecast() {
                           <TableBody>
                             {day3.map((day: listItem, index) => (
                               <TableRow key={index}>
-                                <TableCell className="font-medium">{timestampConversation(day.dt)}</TableCell>
+                                <TableCell className='font-medium'>{timestampConversation(day.dt)}</TableCell>
                                 <TableCell>
-                                  <div className="flex items-center space-x-2">
-                                    {/*<hour.icon className="h-5 w-5 text-primary" />*/}
-                                    <img src={`https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`} className="h-5 w-5" alt='icon'/>
+                                  <div className='flex items-center space-x-2'>
+                                    {/*<hour.icon className='h-5 w-5 text-primary' />*/}
+                                    <img src={`https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`} className='h-5 w-5' alt='icon'/>
                                     <span>{day.weather[0].description}</span>
                                   </div>
                                 </TableCell>
-                                <TableCell className="font-semibold">{Math.round(day.main.temp)}&deg;</TableCell>
+                                <TableCell className='font-semibold'>{Math.round(day.main.temp)}&deg;</TableCell>
                                 <TableCell>{Math.round(day.main.feels_like)}&deg;</TableCell>
                                 <TableCell>{Math.round(day.wind.speed)}</TableCell>
                                 <TableCell>{windDeg(day.wind.deg)}</TableCell>
@@ -464,9 +464,9 @@ export default function WeatherForecast() {
                       </CardContent>
                     </Card>
                   </TabsContent>
-                  <TabsContent value="day4" className="mt-6">
+                  <TabsContent value='day4' className='mt-6'>
                     <Card>
-                      <CardContent className="p-0">
+                      <CardContent className='p-0'>
                         <Table>
                           <TableHeader>
                             <TableRow>
@@ -485,15 +485,15 @@ export default function WeatherForecast() {
                           <TableBody>
                             {day4.map((day, index) => (
                               <TableRow key={index}>
-                                <TableCell className="font-medium">{timestampConversation(day.dt)}</TableCell>
+                                <TableCell className='font-medium'>{timestampConversation(day.dt)}</TableCell>
                                 <TableCell>
-                                  <div className="flex items-center space-x-2">
-                                    {/*<hour.icon className="h-5 w-5 text-primary" />*/}
-                                    <img src={`https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`} className="h-5 w-5" alt='icon'/>
+                                  <div className='flex items-center space-x-2'>
+                                    {/*<hour.icon className='h-5 w-5 text-primary' />*/}
+                                    <img src={`https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`} className='h-5 w-5' alt='icon'/>
                                     <span>{day.weather[0].description}</span>
                                   </div>
                                 </TableCell>
-                                <TableCell className="font-semibold">{Math.round(day.main.temp)}&deg;</TableCell>
+                                <TableCell className='font-semibold'>{Math.round(day.main.temp)}&deg;</TableCell>
                                 <TableCell>{Math.round(day.main.feels_like)}&deg;</TableCell>
                                 <TableCell>{Math.round(day.wind.speed)}</TableCell>
                                 <TableCell>{windDeg(day.wind.deg)}</TableCell>
@@ -508,9 +508,9 @@ export default function WeatherForecast() {
                       </CardContent>
                     </Card>
                   </TabsContent>
-                  <TabsContent value="day5" className="mt-6">
+                  <TabsContent value='day5' className='mt-6'>
                     <Card>
-                      <CardContent className="p-0">
+                      <CardContent className='p-0'>
                         <Table>
                           <TableHeader>
                             <TableRow>
@@ -529,15 +529,15 @@ export default function WeatherForecast() {
                           <TableBody>
                             {day5.map((day: listItem, index) => (
                               <TableRow key={index}>
-                                <TableCell className="font-medium">{timestampConversation(day.dt)}</TableCell>
+                                <TableCell className='font-medium'>{timestampConversation(day.dt)}</TableCell>
                                 <TableCell>
-                                  <div className="flex items-center space-x-2">
-                                    {/*<hour.icon className="h-5 w-5 text-primary" />*/}
-                                    <img src={`https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`} className="h-5 w-5" alt='icon'/>
+                                  <div className='flex items-center space-x-2'>
+                                    {/*<hour.icon className='h-5 w-5 text-primary' />*/}
+                                    <img src={`https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`} className='h-5 w-5' alt='icon'/>
                                     <span>{day.weather[0].description}</span>
                                   </div>
                                 </TableCell>
-                                <TableCell className="font-semibold">{Math.round(day.main.temp)}&deg;</TableCell>
+                                <TableCell className='font-semibold'>{Math.round(day.main.temp)}&deg;</TableCell>
                                 <TableCell>{Math.round(day.main.feels_like)}&deg;</TableCell>
                                 <TableCell>{Math.round(day.wind.speed)}</TableCell>
                                 <TableCell>{windDeg(day.wind.deg)}</TableCell>
@@ -558,9 +558,9 @@ export default function WeatherForecast() {
           </Tabs>
         </main>
         {/* Footer */}
-        <footer className="bg-muted mt-16 py-8">
-          <div className="container mx-auto px-4 text-center">
-            <p className="text-muted-foreground">© 2024 WeatherCast. Powered by modern weather data.</p>
+        <footer className='bg-muted mt-16 py-8'>
+          <div className='container mx-auto px-4 text-center'>
+            <p className='text-muted-foreground'>© 2024 WeatherCast. Powered by modern weather data.</p>
           </div>
         </footer>
       </div>
