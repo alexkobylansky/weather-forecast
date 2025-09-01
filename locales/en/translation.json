@@ -1,3 +1,42 @@
 {
-  "wind": "Wind"
+  "headers": {
+    "currentWeather": "Current Weather",
+    "5-DayForecast": "5-Day Forecast",
+    "hourlyForecast": "Hourly Forecast"
+  },
+  "weather": {
+    "wind": "Wind",
+    "feelsLike": "Feels like",
+    "sunrise": "Sunrise",
+    "sunset": "Sunset",
+    "dayLength": "Day length",
+    "visibility": "Visibility",
+    "windSpeed": "(m/s)",
+    "humidity": "Humidity"
+  },
+  "wind": {
+    "north": "north",
+    "north-east": "north-east",
+    "north-west": "north-west",
+    "east": "east",
+    "south-east": "south-east",
+    "south": "south",
+    "south-west": "south-west",
+    "west": "west"
+  },
+  "table": {
+    "time": "Time",
+    "weather": "Weather",
+    "temperature": "Temperature",
+    "feelsLike": "Feels Like",
+    "wind": "Wind",
+    "windSpeed": "m/s",
+    "windDirection": "Wind direction",
+    "windGust": "Wind gust",
+    "dewPoint": "Dew point",
+    "humidity": "Humidity",
+    "pressure": "Pressure",
+    "visibility": "Visibility",
+    "visibilityDistance": "km"
+  }
 }

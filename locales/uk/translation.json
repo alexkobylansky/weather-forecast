@@ -1,3 +1,41 @@
-{
-  "wind": "Вітер"
+{"headers": {
+  "currentWeather": "Погода Зараз",
+  "5-DayForecast": "5-Денний Прогноз",
+  "hourlyForecast": "Погодинний Прогноз"
+},
+  "weather": {
+    "wind": "Вітер",
+    "feelsLike": "Відчувається як",
+    "sunrise": "Схід сонця",
+    "sunset": "Захід сонця",
+    "dayLength": "Тривалість дня",
+    "visibility": "Видимість",
+    "windSpeed": "м/с",
+    "humidity": "Вологість"
+  },
+  "wind": {
+    "north": "північний",
+    "north-east": "північно-східний",
+    "north-west": "північно-західний",
+    "east": "східний",
+    "south-east": "південно-східний",
+    "south": "південний",
+    "south-west": "південно-західний",
+    "west": "західний"
+  },
+  "table": {
+    "time": "Час",
+    "weather": "Погода",
+    "temperature": "Температура",
+    "feelsLike": "Відчувається як",
+    "wind": "Вітер",
+    "windSpeed": "м/с",
+    "windDirection": "Напрямок вітру",
+    "windGust": "Порив вітру",
+    "dewPoint": "Точка роси",
+    "humidity": "Вологість",
+    "pressure": "Тиск",
+    "visibility": "Видимість",
+    "visibilityDistance": "км"
+  }
 }

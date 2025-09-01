@@ -242,7 +242,7 @@ export default function WeatherForecast() {
                         <Eye className='h-5 w-5 text-primary'/>
                         <div>
                           <p className='text-sm text-muted-foreground'>{t('weather.visibility')}</p>
-                          <p className='font-semibold'>{(currentWeather?.visibility / 1000)} km</p>
+                          <p className='font-semibold'>{`${currentWeather?.visibility / 1000} ${t('table.visibilityDistance')}`}</p>
                         </div>
                       </div>
                       <div className='flex items-center grow justify-center  space-x-2 p-3 rounded-lg bg-muted'>
@@ -266,23 +266,23 @@ export default function WeatherForecast() {
               </section>
               {/* Hourly Forecast Table */}
               <section>
-                <h2 className='text-3xl font-serif font-bold text-foreground mb-6'>Hourly Forecast</h2>
+                <h2 className='text-3xl font-serif font-bold text-foreground mb-6'>{t('headers.hourlyForecast')}</h2>
                 <Card>
                   <CardContent className='p-0'>
                     <Table>
                       <TableHeader>
                         <TableRow>
-                          <TableHead>Time</TableHead>
-                          <TableHead>Weather</TableHead>
-                          <TableHead>Temperature (&deg;C)</TableHead>
-                          <TableHead>Feels Like (&deg;C)</TableHead>
-                          <TableHead>Wind (m/s)</TableHead>
-                          <TableHead>Wind direction</TableHead>
-                          <TableHead>Wind gust</TableHead>
-                          <TableHead>Dew point (&deg;C)</TableHead>
-                          <TableHead>Humidity</TableHead>
-                          <TableHead>Pressure (mmHg)</TableHead>
-                          <TableHead>Visibility (km)</TableHead>
+                          <TableHead>{t('table.time')}</TableHead>
+                          <TableHead>{t('table.weather')}</TableHead>
+                          <TableHead>{t('table.temperature')} (&deg;C)</TableHead>
+                          <TableHead>{t('table.feelsLike')}(&deg;C)</TableHead>
+                          <TableHead>{`${t('table.wind')} (${t('table.windSpeed')})`}</TableHead>
+                          <TableHead>{t('table.windDirection')}</TableHead>
+                          <TableHead>{t('table.windGust')}</TableHead>
+                          <TableHead>{t('table.dewPoint')} (&deg;C)</TableHead>
+                          <TableHead>{t('table.humidity')}</TableHead>
+                          <TableHead>{t('table.pressure')} (mmHg)</TableHead>
+                          <TableHead>{`${t('table.visibility')} (${t('table.visibilityDistance')})`}</TableHead>
                         </TableRow>
                       </TableHeader>
                       <TableBody>
@@ -315,7 +315,7 @@ export default function WeatherForecast() {
             </TabsContent>
             <TabsContent value='forecast'>
               <section>
-                <h2 className='text-3xl font-serif font-bold text-foreground mb-6'>5-Day Forecast</h2>
+                <h2 className='text-3xl font-serif font-bold text-foreground mb-6'>{t('headers.5-DayForecast')}</h2>
                 <Tabs defaultValue='day1' className='w-full'>
                   <TabsList className='grid w-full grid-cols-5'>
                     {oneCallApi.daily.map((day: dailyItem, index) => {
@@ -323,7 +323,7 @@ export default function WeatherForecast() {
                         let currentMonth = getDay((day.dt) * 1000).getMonth();
                         let currentDay = getDay((day.dt) * 1000).getDate();
                         return (
-                          <TabsTrigger key={index} value={`day${index}`}>
+                          <TabsTrigger key={index} value={`day${index}`} className='cursor-pointer'>
                             <div className='forecast-day-block'>
                               <h3>{daysUkr[getDay(day.dt * 1000).getDay()]}</h3>
                               <span className='forecast-day-date'>{monthsUkr[currentMonth]} {currentDay}</span>
@@ -342,16 +342,16 @@ export default function WeatherForecast() {
                         <Table>
                           <TableHeader>
                             <TableRow>
-                              <TableHead>Time</TableHead>
-                              <TableHead>Weather</TableHead>
-                              <TableHead>Temperature (&deg;C)</TableHead>
-                              <TableHead>Feels Like (&deg;C)</TableHead>
-                              <TableHead>Wind (m/s)</TableHead>
-                              <TableHead>Wind direction</TableHead>
-                              <TableHead>Wind gust</TableHead>
-                              <TableHead>Humidity</TableHead>
-                              <TableHead>Pressure (mmHg)</TableHead>
-                              <TableHead>Visibility (km)</TableHead>
+                              <TableHead>{t('table.time')}</TableHead>
+                              <TableHead>{t('table.weather')}</TableHead>
+                              <TableHead>{t('table.temperature')} (&deg;C)</TableHead>
+                              <TableHead>{t('table.feelsLike')}(&deg;C)</TableHead>
+                              <TableHead>{`${t('table.wind')} (${t('table.windSpeed')})`}</TableHead>
+                              <TableHead>{t('table.windDirection')}</TableHead>
+                              <TableHead>{t('table.windGust')}</TableHead>
+                              <TableHead>{t('table.humidity')}</TableHead>
+                              <TableHead>{t('table.pressure')} (mmHg)</TableHead>
+                              <TableHead>{`${t('table.visibility')} (${t('table.visibilityDistance')})`}</TableHead>
                             </TableRow>
                           </TableHeader>
                           <TableBody>
@@ -386,16 +386,16 @@ export default function WeatherForecast() {
                         <Table>
                           <TableHeader>
                             <TableRow>
-                              <TableHead>Time</TableHead>
-                              <TableHead>Weather</TableHead>
-                              <TableHead>Temperature (&deg;C)</TableHead>
-                              <TableHead>Feels Like (&deg;C)</TableHead>
-                              <TableHead>Wind (m/s)</TableHead>
-                              <TableHead>Wind direction</TableHead>
-                              <TableHead>Wind gust</TableHead>
-                              <TableHead>Humidity</TableHead>
-                              <TableHead>Pressure (mmHg)</TableHead>
-                              <TableHead>Visibility (km)</TableHead>
+                              <TableHead>{t('table.time')}</TableHead>
+                              <TableHead>{t('table.weather')}</TableHead>
+                              <TableHead>{t('table.temperature')} (&deg;C)</TableHead>
+                              <TableHead>{t('table.feelsLike')}(&deg;C)</TableHead>
+                              <TableHead>{`${t('table.wind')} (${t('table.windSpeed')})`}</TableHead>
+                              <TableHead>{t('table.windDirection')}</TableHead>
+                              <TableHead>{t('table.windGust')}</TableHead>
+                              <TableHead>{t('table.humidity')}</TableHead>
+                              <TableHead>{t('table.pressure')} (mmHg)</TableHead>
+                              <TableHead>{`${t('table.visibility')} (${t('table.visibilityDistance')})`}</TableHead>
                             </TableRow>
                           </TableHeader>
                           <TableBody>
@@ -430,16 +430,16 @@ export default function WeatherForecast() {
                         <Table>
                           <TableHeader>
                             <TableRow>
-                              <TableHead>Time</TableHead>
-                              <TableHead>Weather</TableHead>
-                              <TableHead>Temperature (&deg;C)</TableHead>
-                              <TableHead>Feels Like (&deg;C)</TableHead>
-                              <TableHead>Wind (m/s)</TableHead>
-                              <TableHead>Wind direction</TableHead>
-                              <TableHead>Wind gust</TableHead>
-                              <TableHead>Humidity</TableHead>
-                              <TableHead>Pressure (mmHg)</TableHead>
-                              <TableHead>Visibility (km)</TableHead>
+                              <TableHead>{t('table.time')}</TableHead>
+                              <TableHead>{t('table.weather')}</TableHead>
+                              <TableHead>{t('table.temperature')} (&deg;C)</TableHead>
+                              <TableHead>{t('table.feelsLike')}(&deg;C)</TableHead>
+                              <TableHead>{`${t('table.wind')} (${t('table.windSpeed')})`}</TableHead>
+                              <TableHead>{t('table.windDirection')}</TableHead>
+                              <TableHead>{t('table.windGust')}</TableHead>
+                              <TableHead>{t('table.humidity')}</TableHead>
+                              <TableHead>{t('table.pressure')} (mmHg)</TableHead>
+                              <TableHead>{`${t('table.visibility')} (${t('table.visibilityDistance')})`}</TableHead>
                             </TableRow>
                           </TableHeader>
                           <TableBody>
@@ -474,16 +474,16 @@ export default function WeatherForecast() {
                         <Table>
                           <TableHeader>
                             <TableRow>
-                              <TableHead>Time</TableHead>
-                              <TableHead>Weather</TableHead>
-                              <TableHead>Temperature (&deg;C)</TableHead>
-                              <TableHead>Feels Like (&deg;C)</TableHead>
-                              <TableHead>Wind (m/s)</TableHead>
-                              <TableHead>Wind direction</TableHead>
-                              <TableHead>Wind gust</TableHead>
-                              <TableHead>Humidity</TableHead>
-                              <TableHead>Pressure (mmHg)</TableHead>
-                              <TableHead>Visibility (km)</TableHead>
+                              <TableHead>{t('table.time')}</TableHead>
+                              <TableHead>{t('table.weather')}</TableHead>
+                              <TableHead>{t('table.temperature')} (&deg;C)</TableHead>
+                              <TableHead>{t('table.feelsLike')}(&deg;C)</TableHead>
+                              <TableHead>{`${t('table.wind')} (${t('table.windSpeed')})`}</TableHead>
+                              <TableHead>{t('table.windDirection')}</TableHead>
+                              <TableHead>{t('table.windGust')}</TableHead>
+                              <TableHead>{t('table.humidity')}</TableHead>
+                              <TableHead>{t('table.pressure')} (mmHg)</TableHead>
+                              <TableHead>{`${t('table.visibility')} (${t('table.visibilityDistance')})`}</TableHead>
                             </TableRow>
                           </TableHeader>
                           <TableBody>
@@ -518,16 +518,16 @@ export default function WeatherForecast() {
                         <Table>
                           <TableHeader>
                             <TableRow>
-                              <TableHead>Time</TableHead>
-                              <TableHead>Weather</TableHead>
-                              <TableHead>Temperature (&deg;C)</TableHead>
-                              <TableHead>Feels Like (&deg;C)</TableHead>
-                              <TableHead>Wind (m/s)</TableHead>
-                              <TableHead>Wind direction</TableHead>
-                              <TableHead>Wind gust</TableHead>
-                              <TableHead>Humidity</TableHead>
-                              <TableHead>Pressure (mmHg)</TableHead>
-                              <TableHead>Visibility (km)</TableHead>
+                              <TableHead>{t('table.time')}</TableHead>
+                              <TableHead>{t('table.weather')}</TableHead>
+                              <TableHead>{t('table.temperature')} (&deg;C)</TableHead>
+                              <TableHead>{t('table.feelsLike')}(&deg;C)</TableHead>
+                              <TableHead>{`${t('table.wind')} (${t('table.windSpeed')})`}</TableHead>
+                              <TableHead>{t('table.windDirection')}</TableHead>
+                              <TableHead>{t('table.windGust')}</TableHead>
+                              <TableHead>{t('table.humidity')}</TableHead>
+                              <TableHead>{t('table.pressure')} (mmHg)</TableHead>
+                              <TableHead>{`${t('table.visibility')} (${t('table.visibilityDistance')})`}</TableHead>
                             </TableRow>
                           </TableHeader>
                           <TableBody>
