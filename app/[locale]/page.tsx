@@ -203,7 +203,7 @@ export default function WeatherForecast() {
                           <p className='text-xl text-muted-foreground'>{currentWeather?.weather[0].description}</p>
                         </td>
                         <td>
-                          <p className='text-sm text-muted-foreground'>Feels like</p>
+                          <p className='text-sm text-muted-foreground'>{t('weather.feelsLike')}</p>
                           <p className='font-semibold'>{Math.round(currentWeather?.main.feels_like)}°C</p>
                         </td>
                       </tr>
@@ -220,43 +220,43 @@ export default function WeatherForecast() {
                       <div className='flex items-center grow justify-center  space-x-2 p-3 rounded-lg bg-muted'>
                         <Sunrise className='h-5 w-5 text-primary'/>
                         <div>
-                          <p className='text-sm text-muted-foreground'>Sunrise</p>
+                          <p className='text-sm text-muted-foreground'>{t('weather.sunrise')}</p>
                           <p className='font-semibold'>{timestampConversation(currentWeather?.sys.sunrise)}</p>
                         </div>
                       </div>
                       <div className='flex items-center grow justify-center  space-x-2 p-3 rounded-lg bg-muted'>
                         <Sunset className='h-5 w-5 text-primary'/>
                         <div>
-                          <p className='text-sm text-muted-foreground'>Sunset</p>
+                          <p className='text-sm text-muted-foreground'>{t('weather.sunset')}</p>
                           <p className='font-semibold'>{timestampConversation(currentWeather?.sys.sunset)}</p>
                         </div>
                       </div>
                       <div className='flex items-center grow justify-center  space-x-2 p-3 rounded-lg bg-muted'>
                         <Clock className='h-5 w-5 text-primary'/>
                         <div>
-                          <p className='text-sm text-muted-foreground'>Day length</p>
+                          <p className='text-sm text-muted-foreground'>{t('weather.dayLength')}</p>
                           <p className='font-semibold'>{getDuration(currentWeather?.sys?.sunrise, currentWeather?.sys.sunset)}</p>
                         </div>
                       </div>
                       <div className='flex items-center grow justify-center  space-x-2 p-3 rounded-lg bg-muted'>
                         <Eye className='h-5 w-5 text-primary'/>
                         <div>
-                          <p className='text-sm text-muted-foreground'>Visibility</p>
+                          <p className='text-sm text-muted-foreground'>{t('weather.visibility')}</p>
                           <p className='font-semibold'>{(currentWeather?.visibility / 1000)} km</p>
                         </div>
                       </div>
                       <div className='flex items-center grow justify-center  space-x-2 p-3 rounded-lg bg-muted'>
                         <Wind className='h-5 w-5 text-primary'/>
                         <div>
-                          <p className='text-sm text-muted-foreground'>{t('wind')}</p>
-                          <p className='font-semibold'>{currentWeather?.wind.speed} м/с</p>
+                          <p className='text-sm text-muted-foreground'>{t('weather.wind')}</p>
+                          <p className='font-semibold'>{`${currentWeather?.wind.speed} ${t('weather.windSpeed')}`}</p>
                           <p className='text-sm text-muted-foreground'>{windDeg(currentWeather?.wind.deg)}</p>
                         </div>
                       </div>
                       <div className='flex items-center grow justify-center  space-x-2 p-3 rounded-lg bg-muted'>
                         <Droplet className='h-5 w-5 text-primary'/>
                         <div>
-                          <p className='text-sm text-muted-foreground'>Humidity</p>
+                          <p className='text-sm text-muted-foreground'>{t('weather.humidity')}</p>
                           <p className='font-semibold'>{currentWeather?.main.humidity} %</p>
                         </div>
                       </div>
