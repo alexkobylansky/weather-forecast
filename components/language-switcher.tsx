@@ -40,14 +40,14 @@ export function LanguageSwitcher() {
       <DropdownMenuContent align='end' className='min-w-[160px]'>
         <DropdownMenuItem
           onClick={() => handleLanguageChange('en')}
-          className={currentLanguage === 'en' ? 'bg-accent' : ""}
+          className={`${currentLanguage === 'en' ? 'bg-accent' : ''} cursor-pointer`}
         >
           <span className='mr-2'>🇺🇸</span>
           English
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => handleLanguageChange('uk')}
-          className={currentLanguage === 'uk' ? 'bg-accent' : ""}
+          className={`${currentLanguage === 'uk' ? 'bg-accent' : ''} cursor-pointer`}
         >
           <span className='mr-2'>🇺🇦</span>
           Українська
