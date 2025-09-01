@@ -18,8 +18,6 @@ export function LanguageSwitcher() {
     uk: { name: 'Українська', flag: '🇺🇦' },
   };
 
-  console.log('currentLocale: ', currentLocale);
-
   const handleLanguageChange = (lang: 'en' | 'uk') => {
     setCurrentLanguage(lang);
     const segments = pathname.split('/');
