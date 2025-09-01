@@ -1,4 +1,9 @@
 {
+  "header": {
+    "search": "search",
+    "searchPlaceholder": "Search for a city",
+    "settings": "Settings"
+  },
   "headers": {
     "currentWeather": "Current Weather",
     "5-DayForecast": "5-Day Forecast",

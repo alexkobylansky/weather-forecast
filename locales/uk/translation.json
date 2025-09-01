@@ -1,4 +1,10 @@
-{"headers": {
+{
+  "header": {
+    "search": "пошук",
+    "searchPlaceholder": "Пошук міста",
+    "settings": "Налаштування"
+  },
+  "headers": {
   "currentWeather": "Погода Зараз",
   "5-DayForecast": "5-Денний Прогноз",
   "hourlyForecast": "Погодинний Прогноз"

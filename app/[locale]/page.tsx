@@ -160,19 +160,19 @@ export default function WeatherForecast() {
               <div className='flex-1 max-w-md mx-8'>
                 <div className='relative'>
                   <Input
-                    placeholder='Search for a city...'
+                    placeholder={`${t('header.searchPlaceholder')}`}
                     className='bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/70'
                   />
                   <Button size='sm' className='absolute right-1 top-1 bg-accent hover:bg-accent/90'>
-                    Search
+                    {`${t('header.search')}`}
                   </Button>
                 </div>
               </div>
               <div className='flex items-center space-x-2'>
                 <LanguageSwitcher/>
-                <Button variant='ghost' className='text-primary-foreground hover:bg-primary-foreground/10'>
-                  Settings
-                </Button>
+                {/*<Button variant='ghost' className='text-primary-foreground hover:bg-primary-foreground/10'>
+                  {`${t('header.settings')}`}
+                </Button>*/}
               </div>
             </div>
           </div>
