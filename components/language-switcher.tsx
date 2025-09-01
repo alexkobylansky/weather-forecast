@@ -29,7 +29,7 @@ export function LanguageSwitcher() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant='ghost' size='sm' className='text-primary-foreground hover:bg-primary-foreground/10 gap-2'>
+        <Button variant='ghost' size='sm' className='text-primary-foreground hover:bg-primary-foreground/10 gap-2 cursor-pointer'>
           <Globe className='h-4 w-4' />
           <span className='hidden sm:inline'>
             {languages[currentLanguage].flag} {languages[currentLanguage].name}
