@@ -52,7 +52,7 @@ export default function WeatherForecast() {
 
   const t = useTranslations();
 
-  const currentLocale = useLocale();
+  // const currentLocale = useLocale();
 
   const windDeg = (deg: number) => {
     if ((deg >= 0 && deg <= 22.5) || (deg >= 337.5 && deg <= 360)) return currentLocale === 'uk' ? 'північний' : 'north'
