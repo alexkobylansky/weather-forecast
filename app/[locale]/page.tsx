@@ -55,13 +55,14 @@ export default function WeatherForecast() {
   // const currentLocale = useLocale();
 
   const windDeg = (deg: number) => {
-    if ((deg >= 0 && deg <= 22.5) || (deg >= 337.5 && deg <= 360)) return currentLocale === 'uk' ? 'північний' : 'north'
-    else if (deg >= 22.6 || deg <= 67.5) return currentLocale === 'uk' ? 'північно-східний' : 'north-east'
-    else if (deg >= 67.6 || deg <= 112.5) return currentLocale === 'uk' ? 'східний' : 'east'
-    else if (deg >= 112.6 || deg <= 157.5) return currentLocale === 'uk' ? 'південно-східний' : 'south-east'
-    else if (deg >= 157.6 || deg <= 202.5) return currentLocale === 'uk' ? 'південний' : 'south'
-    else if (deg >= 202.6 || deg <= 277.5) return currentLocale === 'uk' ? 'південно-західний' : 'south-west'
-    else if (deg >= 277.6 || deg <= 282.5) return currentLocale === 'uk' ? 'західний' : 'west'
+    if ((deg >= 0 && deg <= 22.5) || (deg >= 337.6 && deg <= 360)) return t('wind.north');
+    else if (deg >= 22.6 || deg <= 67.5) return t('wind.north-east');
+    else if (deg >= 67.6 || deg <= 112.5) return t('wind.east');
+    else if (deg >= 112.6 || deg <= 157.5) return t('wind.south-east');
+    else if (deg >= 157.6 || deg <= 202.5) return t('wind.south');
+    else if (deg >= 202.6 || deg <= 277.5) return t('wind.south-west');
+    else if (deg >= 277.6 || deg <= 282.5) return t('wind.west');
+    else if (deg >= 282.6 || deg <= 337.5) return t('wind.north-west');
   };
 
   const getPosition = async (lat: number, lon: number) => {
