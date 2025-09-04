@@ -14,8 +14,8 @@ export function LanguageSwitcher() {
   const [currentLanguage, setCurrentLanguage] = useState<'en' | 'uk'>(currentLocale);
 
   const languages = {
-    en: { name: 'English', flag: '🇺🇸' },
-    uk: { name: 'Українська', flag: '🇺🇦' },
+    en: {name: 'English', flag: 'en'},
+    uk: {name: 'Українська', flag: '🇺🇦'},
   };
 
   const handleLanguageChange = (lang: 'en' | 'uk') => {
@@ -42,7 +42,7 @@ export function LanguageSwitcher() {
           onClick={() => handleLanguageChange('en')}
           className={`${currentLanguage === 'en' ? 'bg-accent' : ''} cursor-pointer`}
         >
-          <span className='mr-2'>🇺🇸</span>
+          <span className='mr-2'>en</span>
           English
         </DropdownMenuItem>
         <DropdownMenuItem
