@@ -4,13 +4,15 @@ declare global {
   }
 }
 
+const appid: string = process.env.REACT_APP_APPID!;
+
 const createParams = (lat: number, lon: number, currentLocale: string) => {
   return {
     lat: String(lat),
     lon: String(lon),
     units: 'metric',
     lang: currentLocale,
-    appid: '2e3f0a4de66d0bcd26974266f439e301'
+    appid: appid
   };
 };
 
