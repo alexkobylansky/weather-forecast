@@ -95,7 +95,7 @@ export default function WeatherForecast() {
     const placeAutocomplete = await new PlaceAutocompleteElement();
     placeAutocomplete.id = 'place-autocomplete-input';
     const wrap = document.getElementById('search');
-    const gmpPlaceAutocomplete = document.getElementById('place-autocomplete-input');
+    // const gmpPlaceAutocomplete = document.getElementById('place-autocomplete-input');
 
     if (wrap) {
       wrap.appendChild(placeAutocomplete);
