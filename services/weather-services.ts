@@ -4,73 +4,48 @@ declare global {
   }
 }
 
-const createParams = (lat: number, lon: number) => {
+const createParams = (lat: number, lon: number, currentLocale: string) => {
   return {
     lat: String(lat),
     lon: String(lon),
     units: 'metric',
-    lang: 'ua',
+    lang: currentLocale,
     appid: '2e3f0a4de66d0bcd26974266f439e301'
   };
 };
 
 const baseURL = 'https://api.openweathermap.org/data';
 
-async function initMap() {
-  const {PlaceAutocompleteElement} = await window.google.maps.importLibrary('places');
-
-  const placeAutocomplete = await new PlaceAutocompleteElement();
-  placeAutocomplete.id = 'place-autocomplete-input';
-  const wrap = document.getElementById('search');
-  const gmpPlaceAutocomplete = document.getElementById('place-autocomplete-input');
-
-  if (wrap) {
-    wrap.appendChild(placeAutocomplete);
-  }
-
-  placeAutocomplete.addEventListener('gmp-select', async ({placePrediction}: {placePrediction:any}) => {
-    const place = placePrediction.toPlace();
-    await place.fetchFields({fields: ['location']});
-
-    const lat = place.location.lat();
-    const lon = place.location.lng();
-    void getCity(lat, lon);
-  });
-}
-
-async function getCity(lat: number, lon: number) {
-  const params = new URLSearchParams(createParams(lat, lon));
+async function getCity(lat: number, lon: number, currentLocale: string) {
+  const params = new URLSearchParams(createParams(lat, lon, currentLocale));
   const url = `${baseURL}/2.5/weather?${params}`;
 
   try {
     const response = await fetch(url);
 
     if (!response.ok) {
-      // showError(response.status, response.statusText);
       throw new Error(`HTTP Error: ${response.status}, ${response.statusText}`);
     }
 
     const currentWeather = await response.json();
-    const forecastWeather = await getForecastWeather(lat, lon);
-    const oneCallWeather = await getOneCallAPI(lat, lon);
+    const forecastWeather = await getForecastWeather(lat, lon, currentLocale);
+    const oneCallWeather = await getOneCallAPI(lat, lon, currentLocale);
     return {currentWeather, forecastWeather, oneCallWeather};
   } catch (error: any) {
     console.error('Fetch error:', error.message);
     throw error;
   } finally {
-    // hidePreloader();
   }
 }
 
-async function getCurrentWeather(lat: number, lon: number): Promise<CurrentWeather> {
-  const params = new URLSearchParams(createParams(lat, lon));
+async function getCurrentWeather(lat: number, lon: number, currentLocale: string): Promise<CurrentWeather> {
+  const params = new URLSearchParams(createParams(lat, lon, currentLocale));
   const url = `${baseURL}/2.5/weather?${params}`;
 
   try {
     const response = await fetch(url);
 
     if (!response.ok) {
-      // showError(response.status, response.statusText);
       throw new Error(`HTTP Error: ${response.status}, ${response.statusText}`);
     }
 
@@ -120,15 +95,14 @@ async function getPlace(lat: number, lon: number) {
   }
 }
 
-async function getForecastWeather(lat: number, lon: number) {
-  const params = new URLSearchParams(createParams(lat, lon));
+async function getForecastWeather(lat: number, lon: number, currentLocale: string) {
+  const params = new URLSearchParams(createParams(lat, lon, currentLocale));
   const url = `${baseURL}/2.5/forecast?${params}`;
 
   try {
     const response = await fetch(url);
 
     if (!response.ok) {
-      // showError(response.status, response.statusText);
       throw new Error(`HTTP Error: ${response.status}, ${response.statusText}`);
     }
 
@@ -139,10 +113,11 @@ async function getForecastWeather(lat: number, lon: number) {
   }
 }
 
-async function getOneCallAPI(lat: number, lon: number) {
-  const params = createParams(lat, lon);
+async function getOneCallAPI(lat: number, lon: number, currentLocale: string) {
+  const params = createParams(lat, lon, currentLocale);
   const paramsWithExclude = new URLSearchParams({
     ...params,
+    lang: currentLocale,
     exclude: 'current,minutely,alerts'
   });
   const url = `${baseURL}/3.0/onecall?${paramsWithExclude}`;
@@ -151,7 +126,6 @@ async function getOneCallAPI(lat: number, lon: number) {
     const response = await fetch(url);
 
     if (!response.ok) {
-      // showError(response.status, response.statusText);
       throw new Error(`HTTP Error: ${response.status}, ${response.statusText}`);
     }
 
@@ -163,7 +137,7 @@ async function getOneCallAPI(lat: number, lon: number) {
 }
 
 export {
-  initMap,
+  getCity,
   getCurrentWeather,
   getForecastWeather,
   getOneCallAPI

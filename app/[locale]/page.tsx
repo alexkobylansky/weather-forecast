@@ -10,7 +10,7 @@ import {useTranslations} from 'next-intl'
 import {useLocale} from 'next-intl'
 import {Cloud, Cloudy, Sun, CloudRain, CloudDrizzle, CloudFog, CloudHail, CloudLightning, CloudMoon, CloudMoonRain, CloudRainWind, CloudSnow, CloudSun, CloudSunRain, Wind, Eye, Thermometer, Sunrise, Sunset, Clock, Moon, Droplet} from 'lucide-react';
 
-import {initMap, getCurrentWeather, getForecastWeather, getOneCallAPI} from '@/services/weather-services';
+import {getCurrentWeather, getForecastWeather, getOneCallAPI, getCity} from '@/services/weather-services';
 
 import {dailyItem, hourlyItem, OneCall} from '@/types/one-call';
 import {listItem, ForecastWeather} from '@/types/forecast-weather';
@@ -65,10 +65,10 @@ export default function WeatherForecast() {
     else if (deg >= 282.6 || deg <= 337.5) return t('wind.north-west');
   };
 
-  const getPosition = async (lat: number, lon: number) => {
-    const currentWeather = await getCurrentWeather(lat, lon);
-    const forecastWeather = await getForecastWeather(lat, lon);
-    const oneCallWeather = await getOneCallAPI(lat, lon)
+  const getPosition = async (lat: number, lon: number, currentLocale: string) => {
+    const currentWeather = await getCurrentWeather(lat, lon, currentLocale);
+    const forecastWeather = await getForecastWeather(lat, lon, currentLocale);
+    const oneCallWeather = await getOneCallAPI(lat, lon, currentLocale)
     setCurrentWeather(currentWeather);
     setForeCastWeather(forecastWeather);
     setOneCallApi(oneCallWeather);
@@ -80,14 +80,36 @@ export default function WeatherForecast() {
     navigator.geolocation.getCurrentPosition(function (geoPosition) {
         let lat = geoPosition ? geoPosition.coords.latitude : 50.4497115;
         let lon = geoPosition ? geoPosition.coords.longitude : 30.5235707;
-        void getPosition(lat, lon);
+        void getPosition(lat, lon, currentLocale);
       },
       function (error) {
         console.log(error);
-        void getPosition(lat, lon);
+        void getPosition(lat, lon, currentLocale);
       }
     );
   };
+
+  async function initAutocomplete() {
+    const {PlaceAutocompleteElement} = await window.google.maps.importLibrary('places');
+
+    const placeAutocomplete = await new PlaceAutocompleteElement();
+    placeAutocomplete.id = 'place-autocomplete-input';
+    const wrap = document.getElementById('search');
+    const gmpPlaceAutocomplete = document.getElementById('place-autocomplete-input');
+
+    if (wrap) {
+      wrap.appendChild(placeAutocomplete);
+    }
+
+    placeAutocomplete.addEventListener('gmp-select', async ({placePrediction}: {placePrediction:any}) => {
+      const place = placePrediction.toPlace();
+      await place.fetchFields({fields: ['location']});
+
+      const lat = place.location.lat();
+      const lon = place.location.lng();
+      void getCity(lat, lon, currentLocale);
+    });
+  }
 
   const todayAt23 = currentDate.setHours(23, 0, 0);
   const tomorrowAt6 = todayAt23 + 25200000;
