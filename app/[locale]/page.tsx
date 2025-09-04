@@ -320,13 +320,17 @@ export default function WeatherForecast() {
                   <TabsList className='grid w-full grid-cols-5'>
                     {oneCallApi.daily.map((day: dailyItem, index) => {
                       if (day.dt >= startDay1 && day.dt <= endDay5) {
-                        let currentMonth = getDay((day.dt) * 1000).getMonth();
-                        let currentDay = getDay((day.dt) * 1000).getDate();
+                        const currentMonth = getDay((day.dt) * 1000).getMonth();
+                        const currentDate = getDay((day.dt) * 1000).getDate();
+                        
+                        const localMonth = currentLocale === 'uk' ? monthsUkr[currentMonth] : monthsEng[currentMonth];
+                        const localDay = currentLocale === 'uk' ? daysUkr[getDay(day.dt * 1000).getDay()] : daysEng[getDay(day.dt * 1000).getDay()];
+                        
                         return (
                           <TabsTrigger key={index} value={`day${index}`} className='cursor-pointer'>
                             <div className='forecast-day-block'>
-                              <h3>{daysUkr[getDay(day.dt * 1000).getDay()]}</h3>
-                              <span className='forecast-day-date'>{monthsUkr[currentMonth]} {currentDay}</span>
+                              <h3>{localDay}</h3>
+                              <span className='forecast-day-date'>{localMonth} {currentDate}</span>
                               <span className='forecast-day-icon'><img src={`https://openweathermap.org/img/wn/${day.weather['0'].icon}@2x.png`} alt='icon'/></span>
                               <span className='forecast-day-temperature'>{Math.floor(day.temp.max)}&deg;C</span><br/>
                               <span className='forecast-day-description'>{day.weather[0].description}</span>
