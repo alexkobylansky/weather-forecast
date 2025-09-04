@@ -36,7 +36,6 @@ async function getCity(lat: number, lon: number, currentLocale: string) {
   } catch (error: any) {
     console.error('Fetch error:', error.message);
     throw error;
-  } finally {
   }
 }
 
