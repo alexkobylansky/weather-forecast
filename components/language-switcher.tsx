@@ -1,15 +1,15 @@
 'use client'
-import { useRouter, usePathname } from 'next/navigation'
-import { useLocale } from 'next-intl'
-import { useState } from 'react'
-import { Button } from '@/components/ui/button'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
-import { Globe } from 'lucide-react'
+import {usePathname, useRouter} from 'next/navigation';
+import {useLocale} from 'next-intl';
+import {useState} from 'react';
+import {Button} from '@/components/ui/button';
+import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from '@/components/ui/dropdown-menu';
+import {Globe} from 'lucide-react';
 
 export function LanguageSwitcher() {
-  const router = useRouter()
-  const pathname = usePathname()
-  const currentLocale = useLocale()
+  const router = useRouter();
+  const pathname = usePathname();
+  const currentLocale = useLocale();
   // @ts-ignore
   const [currentLanguage, setCurrentLanguage] = useState<'en' | 'uk'>(currentLocale);
 
@@ -24,13 +24,13 @@ export function LanguageSwitcher() {
     segments[1] = lang; // заменяем локаль в URL
     const newPath = segments.join('/');
     router.push(newPath);
-  }
+  };
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant='ghost' size='sm' className='text-primary-foreground hover:bg-primary-foreground/10 gap-2 cursor-pointer'>
-          <Globe className='h-4 w-4' />
+          <Globe className='h-4 w-4'/>
           <span className='hidden sm:inline'>
             {languages[currentLanguage].flag} {languages[currentLanguage].name}
           </span>
