@@ -95,9 +95,9 @@ export default function WeatherForecast() {
     const placeAutocomplete = await new PlaceAutocompleteElement();
     placeAutocomplete.id = 'place-autocomplete-input';
     const wrap = document.getElementById('search');
-    // const gmpPlaceAutocomplete = document.getElementById('place-autocomplete-input');
+    const gmpPlaceAutocomplete = document.getElementById('place-autocomplete-input');
 
-    if (wrap) {
+    if (wrap && !gmpPlaceAutocomplete) {
       wrap.appendChild(placeAutocomplete);
     }
 
@@ -180,14 +180,14 @@ export default function WeatherForecast() {
                 <h1 className='text-2xl font-serif font-black text-primary-foreground'>WeatherCast</h1>
               </div>
               <div className='flex-1 max-w-md mx-8'>
-                <div className='relative'>
-                  <Input
+                <div className='relative' id='search'>
+                  {/*<Input
                     placeholder={`${t('header.searchPlaceholder')}`}
                     className='bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/70'
-                  />
-                  <Button size='sm' className='absolute right-1 top-1 bg-accent hover:bg-accent/90'>
+                  />*/}
+                  {/*<Button size='sm' className='absolute right-1 top-1 bg-accent hover:bg-accent/90'>
                     {`${t('header.search')}`}
-                  </Button>
+                  </Button>*/}
                 </div>
               </div>
               <div className='flex items-center space-x-2'>
