@@ -1,12 +1,12 @@
 'use client'
-import {useEffect, useState} from 'react';
+import {useEffect, useState, useRef, RefObject} from 'react';
+import {useTranslations, useLocale} from 'next-intl'
 import {Card, CardContent, CardHeader, CardTitle} from '@/components/ui/card';
 import {Button} from '@/components/ui/button';
 import {Input} from '@/components/ui/input';
 import {Tabs, TabsContent, TabsList, TabsTrigger} from '@/components/ui/tabs';
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from '@/components/ui/table';
 import {LanguageSwitcher} from '@/components/language-switcher';
-import {useTranslations, useLocale} from 'next-intl'
 import {Cloud, Cloudy, Sun, CloudRain, CloudDrizzle, CloudFog, CloudHail, CloudLightning, CloudMoon, CloudMoonRain, CloudRainWind, CloudSnow, CloudSun, CloudSunRain, Wind, Eye, Thermometer, Sunrise, Sunset, Clock, Moon, Droplet} from 'lucide-react';
 
 import {getCurrentWeather, getForecastWeather, getOneCallAPI, getCity} from '@/services/weather-services';
