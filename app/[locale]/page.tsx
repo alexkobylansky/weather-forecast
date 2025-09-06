@@ -693,7 +693,7 @@ export default function WeatherForecast() {
         {/* Footer */}
         <footer className='bg-muted mt-16 py-8'>
           <div className='container mx-auto px-4 text-center'>
-            <p className='text-muted-foreground'>© 2024 WeatherCast. Powered by modern weather data.</p>
+            <p className='text-muted-foreground'>© 2025 WeatherCast. Powered by OpenWeather data</p>
           </div>
         </footer>
       </div>
