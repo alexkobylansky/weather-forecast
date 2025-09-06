@@ -31,8 +31,11 @@ async function getCity(lat: number, lon: number, currentLocale: string) {
     }
 
     const currentWeather = await response.json();
+    currentWeather.name = await getPlace(lat, lon, currentLocale);
+
     const forecastWeather = await getForecastWeather(lat, lon, currentLocale);
     const oneCallWeather = await getOneCallAPI(lat, lon, currentLocale);
+
     return {currentWeather, forecastWeather, oneCallWeather};
   } catch (error: any) {
     console.error('Fetch error:', error.message);
@@ -62,9 +65,7 @@ async function getCurrentWeather(lat: number, lon: number, currentLocale: string
 
     createIcon(currentWeather.weather[0].icon);
 
-    const place = await getPlace(lat, lon);
-
-    currentWeather.name = place;
+    currentWeather.name = await getPlace(lat, lon, currentLocale);
 
     return currentWeather;
   } catch (error: any) {
@@ -73,11 +74,11 @@ async function getCurrentWeather(lat: number, lon: number, currentLocale: string
   }
 }
 
-async function getPlace(lat: number, lon: number) {
+async function getPlace(lat: number, lon: number, currentLocale: string) {
   const params = new URLSearchParams({
     latlng: `${lat},${lon}`,
-    language: 'uk',
-    key: 'AIzaSyBP6TTt_WvIbUp5gx0n5niy6wyC175FUhs'
+    language: `${currentLocale}`,
+    key: googleID
   });
   const url = `https://maps.googleapis.com/maps/api/geocode/json?${params}`;
 
