@@ -62,6 +62,82 @@ export default function WeatherForecast() {
     else if (deg >= 282.6 || deg <= 337.5) return t('wind.north-west');
   };
 
+  function showIcon(id: number, dt: number, classes: string = '') {
+      if (id >= 200 && id <= 232) {
+        return <CloudLightning className={classes}/>
+      } else if (id >= 300 && id <= 321) {
+        return <CloudDrizzle className={classes}/>
+      } else if(id == 500) {
+        if (getDay(dt * 1000).getHours() > getDay(currentWeather.sys.sunrise * 1000).getHours() && getDay(dt * 1000).getHours() <= getDay(currentWeather.sys.sunset * 1000).getHours()) {
+          return <CloudSunRain className={classes}/>
+        } else {
+          return <CloudMoonRain className={classes}/>
+        }
+      } else if(id == 501) {
+        return <CloudDrizzle className={classes}/>
+      } else if(id >= 502 && id <= 504) {
+        return <CloudRain className={classes}/>
+      } else if (id == 511){
+        return <Snowflake className={classes}/>
+      } else if (id >= 520 && id <= 531) {
+        return <CloudRainWind className={classes}/>
+      } else if (id >= 600 && id <= 622) {
+        return <CloudSnow className={classes}/>
+      } else if (id >= 700 && id <= 731) {
+        return <Haze className={classes}/>
+      } else if (id >= 741 && id <= 781) {
+        return <CloudFog className={classes}/>
+      } else if (id === 800) {
+        if (getDay(dt * 1000).getHours() > getDay(currentWeather.sys.sunrise * 1000).getHours() && getDay(dt * 1000).getHours() <= getDay(currentWeather.sys.sunset * 1000).getHours()) {
+          return <Sun  className={classes}/>
+        } else {
+          return <Moon className={classes}/>
+        }
+      } else if (id == 801) {
+        if (getDay(dt * 1000).getHours() > getDay(currentWeather.sys.sunrise * 1000).getHours() && getDay(dt * 1000).getHours() <= getDay(currentWeather.sys.sunset * 1000).getHours()) {
+          return <CloudSun  className={classes}/>
+        } else {
+          return <CloudMoon className={classes}/>
+        }
+      } else if (id == 802) {
+        return <Cloud className={classes}/>
+      } else if (id == 803 || id == 804) {
+        return <Cloudy className={classes}/>
+      }
+  }
+
+  function showMainIcon(id: number, classes: string = '') {
+    if (id >= 200 && id <= 232) {
+      return <CloudLightning className={classes}/>
+    } else if (id >= 300 && id <= 321) {
+      return <CloudDrizzle className={classes}/>
+    } else if(id == 500) {
+      return <CloudSunRain className={classes}/>
+    } else if(id == 501) {
+      return <CloudDrizzle className={classes}/>
+    } else if(id >= 502 && id <= 504) {
+      return <CloudRain className={classes}/>
+    } else if (id == 511){
+      return <Snowflake className={classes}/>
+    } else if (id >= 520 && id <= 531) {
+      return <CloudRainWind className={classes}/>
+    } else if (id >= 600 && id <= 622) {
+      return <CloudSnow className={classes}/>
+    } else if (id >= 700 && id <= 731) {
+      return <Haze className={classes}/>
+    } else if (id >= 741 && id <= 781) {
+      return <CloudFog className={classes}/>
+    } else if (id === 800) {
+      return <Sun  className={classes}/>
+    } else if (id == 801) {
+      return <CloudSun  className={classes}/>
+    } else if (id == 802) {
+      return <Cloud className={classes}/>
+    } else if (id == 803 || id == 804) {
+      return <Cloudy className={classes}/>
+    }
+  }
+
   const getPosition = async (lat: number, lon: number, currentLocale: string) => {
     const currentWeather = await getCurrentWeather(lat, lon, currentLocale);
     const forecastWeather = await getForecastWeather(lat, lon, currentLocale);
@@ -246,7 +322,7 @@ export default function WeatherForecast() {
                       <tbody>
                       <tr>
                         <td>
-                          <img src={`https://openweathermap.org/img/wn/${currentWeather?.weather[0].icon}@2x.png`} alt='icon'/>
+                          {showIcon(currentWeather?.weather[0].id, currentWeather.dt,'h-16 w-16 text-accent')}
                         </td>
                         <td>
                           <CardTitle className='text-6xl font-serif font-black text-foreground mb-2'>{Math.round(currentWeather?.main.temp)}°C</CardTitle>
@@ -345,8 +421,7 @@ export default function WeatherForecast() {
                             <TableCell className='font-medium'>{timestampConversation(item.dt)}</TableCell>
                             <TableCell>
                               <div className='flex items-center space-x-2'>
-                                {/*<hour.icon className='h-5 w-5 text-primary' />*/}
-                                <img src={`https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`} className='h-5 w-5' alt='icon'/>
+                                {showIcon(item.weather[0].id, item.dt,'h-5 w-5 text-primary')}
                                 <span>{item.weather[0].description}</span>
                               </div>
                             </TableCell>
@@ -385,7 +460,9 @@ export default function WeatherForecast() {
                             <div className='forecast-day-block'>
                               <h3>{localDay}</h3>
                               <span className='forecast-day-date'>{localMonth} {currentDate}</span>
-                              <span className='forecast-day-icon'><img src={`https://openweathermap.org/img/wn/${day.weather['0'].icon}@2x.png`} alt='icon'/></span>
+                              <div className='forecast-day-icon h-16 w-16 flex justify-center items-center'>
+                                {showMainIcon(day.weather[0].id, 'text-accent')}
+                              </div>
                               <span className='forecast-day-temperature'>{Math.floor(day.temp.max)}&deg;C</span><br/>
                               <span className='forecast-day-description'>{day.weather[0].description}</span>
                             </div>
@@ -418,8 +495,7 @@ export default function WeatherForecast() {
                                 <TableCell className='font-medium'>{timestampConversation(day.dt)}</TableCell>
                                 <TableCell>
                                   <div className='flex items-center space-x-2'>
-                                    {/*<hour.icon className='h-5 w-5 text-primary' />*/}
-                                    <img src={`https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`} className='h-5 w-5' alt='icon'/>
+                                    {showIcon(day.weather[0].id, day.dt,'h-5 w-5 text-primary')}
                                     <span>{day.weather[0].description}</span>
                                   </div>
                                 </TableCell>
@@ -462,8 +538,7 @@ export default function WeatherForecast() {
                                 <TableCell className='font-medium'>{timestampConversation(day.dt)}</TableCell>
                                 <TableCell>
                                   <div className='flex items-center space-x-2'>
-                                    {/*<hour.icon className='h-5 w-5 text-primary' />*/}
-                                    <img src={`https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`} className='h-5 w-5' alt='icon'/>
+                                    {showIcon(day.weather[0].id, day.dt,'h-5 w-5 text-primary')}
                                     <span>{day.weather[0].description}</span>
                                   </div>
                                 </TableCell>
@@ -506,8 +581,7 @@ export default function WeatherForecast() {
                                 <TableCell className='font-medium'>{timestampConversation(day.dt)}</TableCell>
                                 <TableCell>
                                   <div className='flex items-center space-x-2'>
-                                    {/*<hour.icon className='h-5 w-5 text-primary' />*/}
-                                    <img src={`https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`} className='h-5 w-5' alt='icon'/>
+                                    {showIcon(day.weather[0].id, day.dt,'h-5 w-5 text-primary')}
                                     <span>{day.weather[0].description}</span>
                                   </div>
                                 </TableCell>
@@ -550,8 +624,7 @@ export default function WeatherForecast() {
                                 <TableCell className='font-medium'>{timestampConversation(day.dt)}</TableCell>
                                 <TableCell>
                                   <div className='flex items-center space-x-2'>
-                                    {/*<hour.icon className='h-5 w-5 text-primary' />*/}
-                                    <img src={`https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`} className='h-5 w-5' alt='icon'/>
+                                    {showIcon(day.weather[0].id, day.dt,'h-5 w-5 text-primary')}
                                     <span>{day.weather[0].description}</span>
                                   </div>
                                 </TableCell>
@@ -594,8 +667,7 @@ export default function WeatherForecast() {
                                 <TableCell className='font-medium'>{timestampConversation(day.dt)}</TableCell>
                                 <TableCell>
                                   <div className='flex items-center space-x-2'>
-                                    {/*<hour.icon className='h-5 w-5 text-primary' />*/}
-                                    <img src={`https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`} className='h-5 w-5' alt='icon'/>
+                                    {showIcon(day.weather[0].id, day.dt,'h-5 w-5 text-primary')}
                                     <span>{day.weather[0].description}</span>
                                   </div>
                                 </TableCell>
