@@ -86,26 +86,58 @@ export default function WeatherForecast() {
     );
   };
 
+  const loadScript = () => {
+    if (!window?.google) {
+      const googlePlaces = process.env.NEXT_PUBLIC_GOOGLE_PLACES!;
+      const script = document.createElement('script');
+      script.type = 'text/javascript';
+      script.async = true;
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${googlePlaces}&v=beta`;
+      document.body.appendChild(script);
+      script.onload = () => {
+        if (window?.google?.maps?.importLibrary) {
+          void initAutocomplete()
+        }
+      }
+      script.onerror = () => {
+        console.warn('Could not load script!');
+      }
+    }
+  };
+
+  const searchRef: RefObject<HTMLDivElement | null> = useRef<HTMLDivElement>(null);
+  const calledOnceRef: RefObject<boolean> = useRef(false);
+
   async function initAutocomplete() {
-    const {PlaceAutocompleteElement} = await window.google.maps.importLibrary('places');
-
-    const placeAutocomplete = await new PlaceAutocompleteElement();
-    placeAutocomplete.id = 'place-autocomplete-input';
-    const wrap = document.getElementById('search');
-    const gmpPlaceAutocomplete = document.getElementById('place-autocomplete-input');
-
-    if (wrap && !gmpPlaceAutocomplete) {
-      wrap.appendChild(placeAutocomplete);
+    if (!searchRef.current) {
+      console.warn('searchRef.current is null');
+      return;
     }
 
-    placeAutocomplete.addEventListener('gmp-select', async ({placePrediction}: {placePrediction:any}) => {
-      const place = placePrediction.toPlace();
-      await place.fetchFields({fields: ['location']});
+    if (window?.google?.maps) {
+      const {PlaceAutocompleteElement} = await window.google.maps.importLibrary('places');
 
-      const lat = place.location.lat();
-      const lon = place.location.lng();
-      void getCity(lat, lon, currentLocale);
-    });
+      const placeAutocomplete = new PlaceAutocompleteElement();
+      placeAutocomplete.id = 'place-autocomplete-input';
+      placeAutocomplete.style.colorScheme = 'none';
+      const gmpPlaceAutocomplete = document.getElementById('place-autocomplete-input');
+
+      if (!gmpPlaceAutocomplete) {
+        searchRef.current.appendChild(placeAutocomplete);
+      }
+
+      placeAutocomplete.addEventListener('gmp-select', async ({placePrediction}: {placePrediction:any}) => {
+        const place = placePrediction.toPlace();
+        await place.fetchFields({fields: ['location']});
+
+        const lat = place.location.lat();
+        const lon = place.location.lng();
+        const {currentWeather, forecastWeather, oneCallWeather} = await getCity(lat, lon, currentLocale);
+        setCurrentWeather(currentWeather);
+        setForeCastWeather(forecastWeather);
+        setOneCallApi(oneCallWeather);
+      });
+    }
   }
 
   const todayAt23 = currentDate.setHours(23, 0, 0);
@@ -115,6 +147,16 @@ export default function WeatherForecast() {
   useEffect(() => {
     getLocation();
   }, []);
+
+  useEffect(() => {
+    if (currentWeather.cod && foreCastWeather.cod && oneCallApi.timezone) {
+     if (!calledOnceRef.current) {
+       calledOnceRef.current = true;
+       loadScript();
+     }
+      void initAutocomplete();
+    }
+  }, [currentWeather.cod, foreCastWeather.cod, oneCallApi.timezone]);
 
   const currentHourlyForecast: hourlyItem[] = [];
 
