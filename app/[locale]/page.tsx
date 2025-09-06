@@ -445,7 +445,7 @@ export default function WeatherForecast() {
               <section>
                 <h2 className='text-3xl font-serif font-bold text-foreground mb-6'>{t('headers.5-DayForecast')}</h2>
                 <Tabs defaultValue='day1' className='w-full'>
-                  <TabsList className='grid w-full grid-cols-5'>
+                  <TabsList className='flex flex-row  overflow-x-auto'>
                     {oneCallApi.daily.map((day: dailyItem, index) => {
                       if (day.dt >= startDay1 && day.dt <= endDay5) {
                         const currentMonth = getDay(day.dt * 1000).getMonth();
