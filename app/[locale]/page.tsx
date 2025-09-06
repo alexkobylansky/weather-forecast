@@ -5,7 +5,7 @@ import {Card, CardContent, CardHeader, CardTitle} from '@/components/ui/card';
 import {Tabs, TabsContent, TabsList, TabsTrigger} from '@/components/ui/tabs';
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from '@/components/ui/table';
 import {LanguageSwitcher} from '@/components/language-switcher';
-import {Cloud, Cloudy, Sun, CloudRain, CloudDrizzle, CloudFog, CloudHail, CloudLightning, CloudMoon, CloudMoonRain, CloudRainWind, CloudSnow, CloudSun, CloudSunRain, Wind, Eye, Thermometer, Sunrise, Sunset, Clock, Moon, Droplet} from 'lucide-react';
+import {Cloud, Haze, CloudFog, Cloudy, Snowflake, Sun, CloudRain, CloudDrizzle, CloudLightning, CloudMoon, CloudMoonRain, CloudRainWind, CloudSun, CloudSunRain, CloudSnow, Wind, Eye, Sunrise, Sunset, Clock, Moon, Droplet} from 'lucide-react';
 
 import {getCurrentWeather, getForecastWeather, getOneCallAPI, getCity} from '@/services/weather-services';
 
