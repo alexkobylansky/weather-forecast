@@ -4,7 +4,8 @@ declare global {
   }
 }
 
-const appid: string = process.env.REACT_APP_APPID!;
+const appid: string = process.env.NEXT_PUBLIC_APPID!;
+const googleID: string = process.env.NEXT_PUBLIC_GOOGLE_ID!;
 
 const createParams = (lat: number, lon: number, currentLocale: string) => {
   return {
