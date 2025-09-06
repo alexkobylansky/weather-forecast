@@ -291,8 +291,8 @@ export default function WeatherForecast() {
         {/* Header */}
         <header className='sticky top-0 z-50 bg-primary/95 backdrop-blur supports-[backdrop-filter]:bg-primary/60 border-b border-primary/20'>
           <div className='container mx-auto px-4 py-4'>
-            <div className='flex items-center justify-between'>
-              <div className='flex items-center space-x-2'>
+            <div className='flex items-center justify-between md:flex-row flex-col'>
+              <div className='flex items-center space-x-2 md:mb-0 mb-4'>
                 <Cloud className='h-8 w-8 text-primary-foreground'/>
                 <h1 className='text-2xl font-serif font-black text-primary-foreground'>WeatherCast</h1>
               </div>
@@ -300,7 +300,7 @@ export default function WeatherForecast() {
                 <div className='relative' id='search' ref={searchRef}>
                 </div>
               </div>
-              <div className='flex items-center space-x-2'>
+              <div className='flex items-center space-x-2 md:mt-0 mt-4'>
                 <LanguageSwitcher/>
                 {/*<Button variant='ghost' className='text-primary-foreground hover:bg-primary-foreground/10'>
                   {`${t('header.settings')}`}
