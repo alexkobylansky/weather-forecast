@@ -416,7 +416,7 @@ export default function WeatherForecast() {
                         </TableRow>
                       </TableHeader>
                       <TableBody>
-                        {currentHourlyForecast.map((item, index) => (
+                        {currentHourlyForecast.map((item: hourlyItem, index) => (
                           <TableRow key={index}>
                             <TableCell className='font-medium'>{timestampConversation(item.dt)}</TableCell>
                             <TableCell>
