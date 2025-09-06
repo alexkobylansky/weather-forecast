@@ -91,7 +91,17 @@ async function getPlace(lat: number, lon: number, currentLocale: string) {
 
     const place = await response.json();
 
-    return place.results[0].address_components[2].long_name;
+    let component = place.results[0].address_components.find((component: any) =>
+      component.types.includes("locality")
+    );
+
+    if (!component?.long_name) {
+      component = place.results[0].address_components.find((component: any) =>
+        component.types.includes("political")
+      );
+    }
+
+    return component?.long_name ?? ''
   } catch (error: any) {
     console.error('Fetch error:', error.message);
     throw error;
