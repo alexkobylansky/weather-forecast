@@ -449,8 +449,8 @@ export default function WeatherForecast() {
                   <TabsList className='grid w-full grid-cols-5'>
                     {oneCallApi.daily.map((day: dailyItem, index) => {
                       if (day.dt >= startDay1 && day.dt <= endDay5) {
-                        const currentMonth = getDay((day.dt) * 1000).getMonth();
-                        const currentDate = getDay((day.dt) * 1000).getDate();
+                        const currentMonth = getDay(day.dt * 1000).getMonth();
+                        const currentDate = getDay(day.dt * 1000).getDate();
                         
                         const localMonth = currentLocale === 'uk' ? monthsUkr[currentMonth] : monthsEng[currentMonth];
                         const localDay = currentLocale === 'uk' ? daysUkr[getDay(day.dt * 1000).getDay()] : daysEng[getDay(day.dt * 1000).getDay()];
