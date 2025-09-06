@@ -139,9 +139,9 @@ export default function WeatherForecast() {
   }
 
   const getPosition = async (lat: number, lon: number, currentLocale: string) => {
-    const currentWeather = await getCurrentWeather(lat, lon, currentLocale);
-    const forecastWeather = await getForecastWeather(lat, lon, currentLocale);
-    const oneCallWeather = await getOneCallAPI(lat, lon, currentLocale)
+    const currentWeather: CurrentWeather = await getCurrentWeather(lat, lon, currentLocale);
+    const forecastWeather: ForecastWeather = await getForecastWeather(lat, lon, currentLocale);
+    const oneCallWeather: OneCall = await getOneCallAPI(lat, lon, currentLocale)
     setCurrentWeather(currentWeather);
     setForeCastWeather(forecastWeather);
     setOneCallApi(oneCallWeather);
