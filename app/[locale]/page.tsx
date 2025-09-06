@@ -2,8 +2,6 @@
 import {useEffect, useState, useRef, RefObject} from 'react';
 import {useTranslations, useLocale} from 'next-intl'
 import {Card, CardContent, CardHeader, CardTitle} from '@/components/ui/card';
-import {Button} from '@/components/ui/button';
-import {Input} from '@/components/ui/input';
 import {Tabs, TabsContent, TabsList, TabsTrigger} from '@/components/ui/tabs';
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from '@/components/ui/table';
 import {LanguageSwitcher} from '@/components/language-switcher';
@@ -179,14 +177,7 @@ export default function WeatherForecast() {
                 <h1 className='text-2xl font-serif font-black text-primary-foreground'>WeatherCast</h1>
               </div>
               <div className='flex-1 max-w-md mx-8'>
-                <div className='relative' id='search'>
-                  {/*<Input
-                    placeholder={`${t('header.searchPlaceholder')}`}
-                    className='bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/70'
-                  />*/}
-                  {/*<Button size='sm' className='absolute right-1 top-1 bg-accent hover:bg-accent/90'>
-                    {`${t('header.search')}`}
-                  </Button>*/}
+                <div className='relative' id='search' ref={searchRef}>
                 </div>
               </div>
               <div className='flex items-center space-x-2'>
