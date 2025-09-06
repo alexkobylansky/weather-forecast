@@ -160,3 +160,11 @@
 .current-weather-table tr:nth-child(3) td {
   width: 100%;
 }
+
+gmp-place-autocomplete::part(input) {
+  @apply bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/70
+}
+.forecast-day-block .forecast-day-icon svg {
+  width: 60px;
+  height: 60px;
+}
