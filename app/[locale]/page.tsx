@@ -63,12 +63,14 @@ export default function WeatherForecast() {
   };
 
   function showIcon(id: number, dt: number, classes: string = '') {
+    const sunrise = currentWeather.sys.sunrise;
+    const sunset = currentWeather.sys.sunset;
       if (id >= 200 && id <= 232) {
         return <CloudLightning className={classes}/>
       } else if (id >= 300 && id <= 321) {
         return <CloudDrizzle className={classes}/>
       } else if(id == 500) {
-        if (getDay(dt * 1000).getHours() > getDay(currentWeather.sys.sunrise * 1000).getHours() && getDay(dt * 1000).getHours() <= getDay(currentWeather.sys.sunset * 1000).getHours()) {
+        if (getDay(dt * 1000).getHours() > getDay(sunrise * 1000).getHours() && getDay(dt * 1000).getHours() <= getDay(sunset * 1000).getHours()) {
           return <CloudSunRain className={classes}/>
         } else {
           return <CloudMoonRain className={classes}/>
@@ -88,13 +90,13 @@ export default function WeatherForecast() {
       } else if (id >= 741 && id <= 781) {
         return <CloudFog className={classes}/>
       } else if (id === 800) {
-        if (getDay(dt * 1000).getHours() > getDay(currentWeather.sys.sunrise * 1000).getHours() && getDay(dt * 1000).getHours() <= getDay(currentWeather.sys.sunset * 1000).getHours()) {
+        if (getDay(dt * 1000).getHours() > getDay(sunrise * 1000).getHours() && getDay(dt * 1000).getHours() <= getDay(sunset * 1000).getHours()) {
           return <Sun  className={classes}/>
         } else {
           return <Moon className={classes}/>
         }
       } else if (id == 801) {
-        if (getDay(dt * 1000).getHours() > getDay(currentWeather.sys.sunrise * 1000).getHours() && getDay(dt * 1000).getHours() <= getDay(currentWeather.sys.sunset * 1000).getHours()) {
+        if (getDay(dt * 1000).getHours() > getDay(sunrise * 1000).getHours() && getDay(dt * 1000).getHours() <= getDay(sunset * 1000).getHours()) {
           return <CloudSun  className={classes}/>
         } else {
           return <CloudMoon className={classes}/>
