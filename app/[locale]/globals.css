@@ -157,11 +157,6 @@
   align-items: center;
 }
 
-.current-weather-table tr:nth-child(2) td:first-child {
-  position: relative;
-  top: -13px;
-}
-
 .current-weather-table tr:nth-child(3) td {
   width: 100%;
 }
