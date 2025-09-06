@@ -142,6 +142,10 @@
   align-items: center;
 }
 
+.current-weather-table tr:nth-child(2) {
+  align-items: flex-start;
+}
+
 .current-weather-table td {
   width: calc(245px/2);
 }
