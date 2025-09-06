@@ -302,9 +302,6 @@ export default function WeatherForecast() {
               </div>
               <div className='flex items-center space-x-2 md:mt-0 mt-4'>
                 <LanguageSwitcher/>
-                {/*<Button variant='ghost' className='text-primary-foreground hover:bg-primary-foreground/10'>
-                  {`${t('header.settings')}`}
-                </Button>*/}
               </div>
             </div>
           </div>
