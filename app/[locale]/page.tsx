@@ -450,10 +450,10 @@ export default function WeatherForecast() {
                       if (day.dt >= startDay1 && day.dt <= endDay5) {
                         const currentMonth = getDay(day.dt * 1000).getMonth();
                         const currentDate = getDay(day.dt * 1000).getDate();
-                        
+
                         const localMonth = currentLocale === 'uk' ? monthsUkr[currentMonth] : monthsEng[currentMonth];
                         const localDay = currentLocale === 'uk' ? daysUkr[getDay(day.dt * 1000).getDay()] : daysEng[getDay(day.dt * 1000).getDay()];
-                        
+
                         return (
                           <TabsTrigger key={index} value={`day${index}`} className='cursor-pointer'>
                             <div className='forecast-day-block'>
