@@ -459,7 +459,7 @@ export default function WeatherForecast() {
                             <div className='forecast-day-block'>
                               <h3>{localDay}</h3>
                               <span className='forecast-day-date'>{localMonth} {currentDate}</span>
-                              <div className='forecast-day-icon h-16 w-16 flex justify-center items-center'>
+                              <div className='forecast-day-icon h-16 w-16 flex justify-center items-center w-full'>
                                 {showMainIcon(day.weather[0].id, 'text-accent')}
                               </div>
                               <span className='forecast-day-temperature'>{Math.floor(day.temp.max)}&deg;C</span><br/>
