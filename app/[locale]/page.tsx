@@ -455,7 +455,7 @@ export default function WeatherForecast() {
                         const localDay = currentLocale === 'uk' ? daysUkr[getDay(day.dt * 1000).getDay()] : daysEng[getDay(day.dt * 1000).getDay()];
 
                         return (
-                          <TabsTrigger key={index} value={`day${index}`} className='cursor-pointer'>
+                          <TabsTrigger key={index} value={`day${index}`} className='cursor-pointer min-w-[200px]'>
                             <div className='forecast-day-block'>
                               <h3>{localDay}</h3>
                               <span className='forecast-day-date'>{localMonth} {currentDate}</span>
