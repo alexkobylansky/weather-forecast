@@ -13,7 +13,7 @@ import {dailyItem, hourlyItem, OneCall} from '@/types/one-call';
 import {listItem, ForecastWeather} from '@/types/forecast-weather';
 
 const currentDate: Date = new Date();
-let getDay = (time: number) => new Date(time);
+const getDay = (time: number) => new Date(time);
 
 const monthsUkr = ['Січень', 'Лютий', 'Березень', 'Квітень', 'Травень', 'Червень', 'Липень', 'Серпень', 'Вересень', 'Жовтень', 'Листопад', 'Грудень'];
 const monthsEng = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
