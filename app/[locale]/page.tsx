@@ -338,7 +338,7 @@ export default function WeatherForecast() {
                       </tr>
                       <tr>
                         <td colSpan={2}>
-                          <span>{currentWeather?.name}</span>
+                          <span className='text-[30px]'>{currentWeather?.name}</span>
                         </td>
                       </tr>
                       </tbody>
