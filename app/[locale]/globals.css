@@ -170,3 +170,20 @@
   width: 60px;
   height: 60px;
 }
+
+.current-weather-wind {
+  position: relative;
+}
+
+.current-weather-wind p.current-weather-wind-deg {
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+  white-space: nowrap;
+}
+
+@media screen and (max-width: 1024px){
+  .current-weather-wind p.current-weather-wind-deg {
+    position: static;
+  }
+}
