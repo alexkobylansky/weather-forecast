@@ -309,8 +309,8 @@ export default function WeatherForecast() {
         <main className='container mx-auto px-4 py-8'>
           <Tabs defaultValue='current' className='w-full'>
             <TabsList className='grid w-full grid-cols-2 mb-8'>
-              <TabsTrigger className='cursor-pointer' value='current'>{t('headers.currentWeather')}</TabsTrigger>
-              <TabsTrigger className='cursor-pointer' value='forecast'>{t('headers.5-DayForecast')}</TabsTrigger>
+              <TabsTrigger className='cursor-pointer h-[70px]' value='current'>{t('headers.currentWeather')}</TabsTrigger>
+              <TabsTrigger className='cursor-pointer h-[70px]' value='forecast'>{t('headers.5-DayForecast')}</TabsTrigger>
             </TabsList>
             <TabsContent value='current'>
               {/* Current Weather Section */}
