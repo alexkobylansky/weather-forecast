@@ -376,10 +376,10 @@ export default function WeatherForecast() {
                       </div>
                       <div className='flex items-center grow justify-center [@media(max-width:382px)]:justify-start space-x-2 p-3 rounded-lg bg-muted'>
                         <Wind className='h-5 w-5 text-primary'/>
-                        <div>
+                        <div className='current-weather-wind'>
                           <p className='text-sm text-muted-foreground'>{t('weather.wind')}</p>
-                          <p className='font-semibold'>{`${currentWeather?.wind.speed} ${t('weather.windSpeed')}`}</p>
-                          <p className='text-sm text-muted-foreground'>{windDeg(currentWeather?.wind.deg)}</p>
+                          <p className='font-semibold'>{`${Math.round(currentWeather?.wind.speed)} ${t('weather.windSpeed')}`}</p>
+                          <p className='text-sm text-muted-foreground current-weather-wind-deg'>{windDeg(currentWeather?.wind.deg)}</p>
                         </div>
                       </div>
                       <div className='flex items-center grow justify-center [@media(max-width:382px)]:justify-start space-x-2 p-3 rounded-lg bg-muted'>
