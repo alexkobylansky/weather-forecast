@@ -445,7 +445,7 @@ export default function WeatherForecast() {
               <section>
                 <h2 className='text-3xl font-serif font-bold text-foreground mb-6'>{t('headers.5-DayForecast')}</h2>
                 <Tabs defaultValue='day1' className='w-full'>
-                  <TabsList className='flex flex-row  overflow-x-auto'>
+                  <TabsList className='flex flex-row  overflow-x-auto py-3 px-1'>
                     {oneCallApi.daily.map((day: dailyItem, index) => {
                       if (day.dt >= startDay1 && day.dt <= endDay5) {
                         const currentMonth = getDay(day.dt * 1000).getMonth();
@@ -455,14 +455,14 @@ export default function WeatherForecast() {
                         const localDay = currentLocale === 'uk' ? daysUkr[getDay(day.dt * 1000).getDay()] : daysEng[getDay(day.dt * 1000).getDay()];
 
                         return (
-                          <TabsTrigger key={index} value={`day${index}`} className='cursor-pointer min-w-[200px]'>
+                          <TabsTrigger key={index} value={`day${index}`} className='cursor-pointer min-w-[200px] py-3'>
                             <div className='forecast-day-block'>
                               <h3>{localDay}</h3>
                               <span className='forecast-day-date'>{localMonth} {currentDate}</span>
-                              <div className='forecast-day-icon h-16 w-16 flex justify-center items-center w-full'>
+                              <div className='forecast-day-icon h-16 w-16 flex justify-center items-center w-full pt-3'>
                                 {showMainIcon(day.weather[0].id, 'text-accent')}
                               </div>
-                              <span className='forecast-day-temperature'>{Math.floor(day.temp.max)}&deg;C</span><br/>
+                              <span className='forecast-day-temperature text-2xl pt-2.5 block'>{Math.floor(day.temp.max)}&deg;C</span>
                               <span className='forecast-day-description'>{day.weather[0].description}</span>
                             </div>
                           </TabsTrigger>
