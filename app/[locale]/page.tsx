@@ -349,7 +349,7 @@ export default function WeatherForecast() {
                       <tbody>
                       <tr>
                         <td>
-                          {showIcon(currentWeather?.weather[0].id, currentWeather.dt,'h-16 w-16 text-accent')}
+                          {showIcon(currentWeather?.weather[0].id, currentWeather.dt, 'h-16 w-16 text-accent')}
                         </td>
                         <td>
                           <CardTitle className='text-6xl text-foreground'>{Math.round(currentWeather?.main.temp)}°C</CardTitle>
