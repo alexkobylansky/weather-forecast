@@ -204,7 +204,7 @@ export default function WeatherForecast() {
       script.src = `https://maps.googleapis.com/maps/api/js?key=${googlePlaces}&v=beta`;
       document.body.appendChild(script);
       script.onload = () => {
-        if (window?.google?.maps?.importLibrary) {
+        if (window.google?.maps?.importLibrary) {
           void initAutocomplete()
         }
       }
