@@ -292,27 +292,24 @@ export default function WeatherForecast() {
   const startDay5 = trunc((endDay4 * 1000) + MS_IN_3_HOURS);
   const endDay5 = trunc((endDay4 * 1000) + MS_IN_DAY);
 
-  const day1 = [];
-  const day2 = [];
-  const day3 = [];
-  const day4 = [];
-  const day5 = [];
-
-  if (foreCastWeather.list) {
-    for (let i = 0; i < foreCastWeather.list.length; i++) {
-      if (foreCastWeather.list[i].dt >= startDay1 && foreCastWeather.list[i].dt <= endDay1) {
-        day1.push(foreCastWeather.list[i]);
-      } else if (foreCastWeather.list[i].dt >= startDay2 && foreCastWeather.list[i].dt <= endDay2) {
-        day2.push(foreCastWeather.list[i]);
-      } else if (foreCastWeather.list[i].dt >= startDay3 && foreCastWeather.list[i].dt <= endDay3) {
-        day3.push(foreCastWeather.list[i]);
-      } else if (foreCastWeather.list[i].dt >= startDay4 && foreCastWeather.list[i].dt <= endDay4) {
-        day4.push(foreCastWeather.list[i]);
-      } else if (foreCastWeather.list[i].dt >= startDay5 && foreCastWeather.list[i].dt <= endDay5) {
-        day5.push(foreCastWeather.list[i]);
+  useEffect(() => {
+    if (foreCastWeather.list && !firstInitDays.current) {
+      for (let i = 0; i < foreCastWeather.list.length; i++) {
+        if (foreCastWeather.list[i].dt >= startDay1 && foreCastWeather.list[i].dt <= endDay1) {
+          setDay1((prevState: listItem[]) => [...prevState, foreCastWeather.list[i]]);
+        } else if (foreCastWeather.list[i].dt >= startDay2 && foreCastWeather.list[i].dt <= endDay2) {
+          setDay2((prevState: listItem[]) => [...prevState, foreCastWeather.list[i]]);
+        } else if (foreCastWeather.list[i].dt >= startDay3 && foreCastWeather.list[i].dt <= endDay3) {
+          setDay3((prevState: listItem[]) => [...prevState, foreCastWeather.list[i]]);
+        } else if (foreCastWeather.list[i].dt >= startDay4 && foreCastWeather.list[i].dt <= endDay4) {
+          setDay4((prevState: listItem[]) => [...prevState, foreCastWeather.list[i]]);
+        } else if (foreCastWeather.list[i].dt >= startDay5 && foreCastWeather.list[i].dt <= endDay5) {
+          setDay5((prevState: listItem[]) => [...prevState, foreCastWeather.list[i]]);
+        }
       }
+      firstInitDays.current = true;
     }
-  }
+  }, [foreCastWeather.list]);
 
   if (!currentWeather.cod && !foreCastWeather.cod && !oneCallApi.timezone) {
     return <div><p>Loading...</p></div>
