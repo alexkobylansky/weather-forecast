@@ -259,10 +259,10 @@ export default function WeatherForecast() {
 
   useEffect(() => {
     if (currentWeather.cod && foreCastWeather.cod && oneCallApi.timezone) {
-     if (!calledOnceRef.current) {
-       calledOnceRef.current = true;
-       loadScript();
-     }
+      if (!calledOnceRef.current) {
+        calledOnceRef.current = true;
+        loadScript();
+      }
       void initAutocomplete();
     }
   }, [currentWeather.cod, foreCastWeather.cod, oneCallApi.timezone]);
