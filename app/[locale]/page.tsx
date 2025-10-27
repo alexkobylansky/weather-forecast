@@ -235,7 +235,7 @@ export default function WeatherForecast() {
         searchRef.current.appendChild(placeAutocomplete);
       }
 
-      placeAutocomplete.addEventListener('gmp-select', async ({placePrediction}: {placePrediction:any}) => {
+      placeAutocomplete.addEventListener('gmp-select', async ({placePrediction}: {placePrediction: any}) => {
         const place = placePrediction.toPlace();
         await place.fetchFields({fields: ['location']});
 
