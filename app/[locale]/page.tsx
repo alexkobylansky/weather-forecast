@@ -34,6 +34,7 @@ import {getCurrentWeather, getForecastWeather, getOneCallAPI, getCity} from '@/s
 
 import {dailyItem, hourlyItem, OneCall} from '@/types/one-call';
 import {listItem, ForecastWeather} from '@/types/forecast-weather';
+import {DaysTabComponent} from "@/components/days-tab-component";
 
 const currentDate: Date = new Date();
 const getDay = (time: number) => new Date(time);
