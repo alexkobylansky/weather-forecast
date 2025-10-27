@@ -55,8 +55,8 @@ const timestampConversation = (t: number) => {
 };
 
 const getDuration = (sunrise: number, sunset: number) => {
-  const sunRise = getDay(sunrise).getTime();
-  const sunSet = getDay(sunset).getTime();
+  const sunRise = getDay(sunrise * 1000).getTime();
+  const sunSet = getDay(sunset * 1000).getTime();
   const different: number = sunSet - sunRise;
   let hours: string | number = Math.floor((different % 86400) / 3600)
   let minutes: string | number = Math.ceil(((different % 86400) % 3600) / 60);
