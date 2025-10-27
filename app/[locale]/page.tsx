@@ -61,8 +61,8 @@ const getDuration = (sunrise: number, sunset: number) => {
   let hours: string | number = Math.floor((different % 86400) / 3600)
   let minutes: string | number = Math.ceil(((different % 86400) % 3600) / 60);
   if (minutes === 60) minutes -= 1;
-  hours = (hours < 10) ? '0' + hours : hours;
-  minutes = (minutes < 10) ? '0' + minutes : minutes;
+  hours = (hours < 10) ? `0${hours}` : hours;
+  minutes = (minutes < 10) ? `0${minutes}` : minutes;
   return `${hours} ч ${minutes} мин`;
 };
 
