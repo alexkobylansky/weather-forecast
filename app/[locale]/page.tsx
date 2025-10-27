@@ -96,47 +96,47 @@ export default function WeatherForecast() {
   function showIcon(id: number, dt: number, classes: string = '') {
     const sunrise = currentWeather.sys.sunrise;
     const sunset = currentWeather.sys.sunset;
-      if (id >= 200 && id <= 232) {
-        return <CloudLightning className={classes}/>
-      } else if (id >= 300 && id <= 321) {
-        return <CloudDrizzle className={classes}/>
-      } else if(id == 500) {
-        if (getDay(dt * 1000).getHours() > getDay(sunrise * 1000).getHours() && getDay(dt * 1000).getHours() <= getDay(sunset * 1000).getHours()) {
-          return <CloudSunRain className={classes}/>
-        } else {
-          return <CloudMoonRain className={classes}/>
-        }
-      } else if(id == 501) {
-        return <CloudDrizzle className={classes}/>
-      } else if(id >= 502 && id <= 504) {
-        return <CloudRain className={classes}/>
-      } else if (id == 511){
-        return <Snowflake className={classes}/>
-      } else if (id >= 520 && id <= 531) {
-        return <CloudRainWind className={classes}/>
-      } else if (id >= 600 && id <= 622) {
-        return <CloudSnow className={classes}/>
-      } else if (id >= 700 && id <= 731) {
-        return <Haze className={classes}/>
-      } else if (id >= 741 && id <= 781) {
-        return <CloudFog className={classes}/>
-      } else if (id === 800) {
-        if (getDay(dt * 1000).getHours() > getDay(sunrise * 1000).getHours() && getDay(dt * 1000).getHours() <= getDay(sunset * 1000).getHours()) {
-          return <Sun  className={classes}/>
-        } else {
-          return <Moon className={classes}/>
-        }
-      } else if (id == 801) {
-        if (getDay(dt * 1000).getHours() > getDay(sunrise * 1000).getHours() && getDay(dt * 1000).getHours() <= getDay(sunset * 1000).getHours()) {
-          return <CloudSun  className={classes}/>
-        } else {
-          return <CloudMoon className={classes}/>
-        }
-      } else if (id == 802) {
-        return <Cloud className={classes}/>
-      } else if (id == 803 || id == 804) {
-        return <Cloudy className={classes}/>
+    if (id >= 200 && id <= 232) {
+      return <CloudLightning className={classes}/>
+    } else if (id >= 300 && id <= 321) {
+      return <CloudDrizzle className={classes}/>
+    } else if (id == 500) {
+      if (getDay(dt * 1000).getHours() > getDay(sunrise * 1000).getHours() && getDay(dt * 1000).getHours() <= getDay(sunset * 1000).getHours()) {
+        return <CloudSunRain className={classes}/>
+      } else {
+        return <CloudMoonRain className={classes}/>
       }
+    } else if (id == 501) {
+      return <CloudDrizzle className={classes}/>
+    } else if (id >= 502 && id <= 504) {
+      return <CloudRain className={classes}/>
+    } else if (id == 511) {
+      return <Snowflake className={classes}/>
+    } else if (id >= 520 && id <= 531) {
+      return <CloudRainWind className={classes}/>
+    } else if (id >= 600 && id <= 622) {
+      return <CloudSnow className={classes}/>
+    } else if (id >= 700 && id <= 731) {
+      return <Haze className={classes}/>
+    } else if (id >= 741 && id <= 781) {
+      return <CloudFog className={classes}/>
+    } else if (id === 800) {
+      if (getDay(dt * 1000).getHours() > getDay(sunrise * 1000).getHours() && getDay(dt * 1000).getHours() <= getDay(sunset * 1000).getHours()) {
+        return <Sun className={classes}/>
+      } else {
+        return <Moon className={classes}/>
+      }
+    } else if (id == 801) {
+      if (getDay(dt * 1000).getHours() > getDay(sunrise * 1000).getHours() && getDay(dt * 1000).getHours() <= getDay(sunset * 1000).getHours()) {
+        return <CloudSun className={classes}/>
+      } else {
+        return <CloudMoon className={classes}/>
+      }
+    } else if (id == 802) {
+      return <Cloud className={classes}/>
+    } else if (id == 803 || id == 804) {
+      return <Cloudy className={classes}/>
+    }
   }
 
   function showMainIcon(id: number, classes: string = '') {
