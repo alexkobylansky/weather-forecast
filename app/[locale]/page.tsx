@@ -70,6 +70,13 @@ export default function WeatherForecast() {
   const [currentWeather, setCurrentWeather] = useState<CurrentWeather>({} as CurrentWeather);
   const [foreCastWeather, setForeCastWeather] = useState<ForecastWeather>({} as ForecastWeather);
   const [oneCallApi, setOneCallApi] = useState<OneCall>({} as OneCall);
+  const [day1, setDay1] = useState<listItem[]>([]);
+  const [day2, setDay2] = useState<listItem[]>([]);
+  const [day3, setDay3] = useState<listItem[]>([]);
+  const [day4, setDay4] = useState<listItem[]>([]);
+  const [day5, setDay5] = useState<listItem[]>([]);
+
+  const firstInitDays = useRef(false);
 
   const t = useTranslations();
 
