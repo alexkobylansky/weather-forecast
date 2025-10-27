@@ -144,13 +144,13 @@ export default function WeatherForecast() {
       return <CloudLightning className={classes}/>
     } else if (id >= 300 && id <= 321) {
       return <CloudDrizzle className={classes}/>
-    } else if(id == 500) {
+    } else if (id == 500) {
       return <CloudSunRain className={classes}/>
-    } else if(id == 501) {
+    } else if (id == 501) {
       return <CloudDrizzle className={classes}/>
-    } else if(id >= 502 && id <= 504) {
+    } else if (id >= 502 && id <= 504) {
       return <CloudRain className={classes}/>
-    } else if (id == 511){
+    } else if (id == 511) {
       return <Snowflake className={classes}/>
     } else if (id >= 520 && id <= 531) {
       return <CloudRainWind className={classes}/>
@@ -161,9 +161,9 @@ export default function WeatherForecast() {
     } else if (id >= 741 && id <= 781) {
       return <CloudFog className={classes}/>
     } else if (id === 800) {
-      return <Sun  className={classes}/>
+      return <Sun className={classes}/>
     } else if (id == 801) {
-      return <CloudSun  className={classes}/>
+      return <CloudSun className={classes}/>
     } else if (id == 802) {
       return <Cloud className={classes}/>
     } else if (id == 803 || id == 804) {
