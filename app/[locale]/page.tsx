@@ -448,7 +448,7 @@ export default function WeatherForecast() {
                             <TableCell className='font-medium'>{timestampConversation(item.dt)}</TableCell>
                             <TableCell>
                               <div className='flex items-center space-x-2'>
-                                {showIcon(item.weather[0].id, item.dt,'h-5 w-5 text-primary')}
+                                {showIcon(item.weather[0].id, item.dt, 'h-5 w-5 text-primary')}
                                 <span>{item.weather[0].description}</span>
                               </div>
                             </TableCell>
