@@ -388,13 +388,13 @@ export default function WeatherForecast() {
                           <p className='font-semibold'>{timestampConversation(currentWeather?.sys.sunset)}</p>
                         </div>
                       </div>
-                      <div className='flex items-center grow justify-center [@media(max-width:382px)]:justify-start space-x-2 p-3 rounded-lg bg-muted'>
+                      {/*<div className='flex items-center grow justify-center [@media(max-width:382px)]:justify-start space-x-2 p-3 rounded-lg bg-muted'>
                         <Clock className='h-5 w-5 text-primary'/>
                         <div>
                           <p className='text-sm text-muted-foreground'>{t('weather.dayLength')}</p>
                           <p className='font-semibold'>{getDuration(currentWeather?.sys?.sunrise, currentWeather?.sys.sunset)}</p>
                         </div>
-                      </div>
+                      </div>*/}
                       <div className='flex items-center grow justify-center [@media(max-width:382px)]:justify-start space-x-2 p-3 rounded-lg bg-muted'>
                         <Eye className='h-5 w-5 text-primary'/>
                         <div>
